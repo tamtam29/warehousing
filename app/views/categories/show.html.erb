@@ -1,0 +1,34 @@
+<div id="page-wrapper">
+  <h1><i class="fa fa-archive"></i> Kategori Barang</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-building fa-fw"></i> Master</li>
+    <li><%= link_to categories_path do %>Daftar Kategori Barang<% end %></li>
+    <li class="avtive">Detail Kategori Barang</li>
+  </ol>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail Kategori Barang</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <br />
+        <div class="form-group">
+          <div class="row row_content">
+            <div class="title_row">Kode</div><div class="data_row"><%= @category.code %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Kategori Barang</div><div class="data_row"><%= @category.name %></div>
+          </div>
+        </div>
+        <%= link_to categories_path do %><i class="fa fa-reply-all"></i> Ke kategori barang<% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>

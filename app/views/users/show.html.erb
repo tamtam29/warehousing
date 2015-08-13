@@ -1,0 +1,46 @@
+<div id="page-wrapper">
+  <h1><i class="fa fa-user"></i> Hak Akses</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-building fa-fw"></i> Master</li>
+    <li><%= link_to users_path do %>Daftar User<% end %></li>
+    <li class="active"><i class="users icon"></i> Detail User</li>
+  </ol>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail User</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <br />
+        <div class="form-group">
+          <div class="row row_content">
+            <div class="title_row">Firt Name</div><div class="data_row"><%= @user.first_name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Last Name</div><div class="data_row"><%= @user.last_name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Email</div><div class="data_row"><%= @user.email %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Username</div><div class="data_row"><%= @user.username %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Password</div><div class="data_row">**********</div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Role</div><div class="data_row"><%= @user.role %></div>
+          </div>
+        </div>
+        <%= link_to users_path do %><i class="fa fa-reply-all"></i> Ke hak akses<% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>

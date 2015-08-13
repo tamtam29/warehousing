@@ -1,0 +1,26 @@
+@mixin title_row($width){
+  font-weight: bold;
+  text-align: right;
+  width: $width;
+  float: left;
+  padding: 5px;
+  background-color: rgba(238, 238, 238, 0.8);
+  margin: 3px 0px;
+}
+
+@mixin data_row($width){
+  width: $width - 2;
+  float: left;
+  padding: 5px;
+  margin: 3px 0px;
+  margin-left: 2px;
+}
+.row.row_content {
+  margin-left: 0%;
+}
+.title_row {
+  @include title_row(30%);
+}
+.data_row {
+  @include data_row(70%);
+}

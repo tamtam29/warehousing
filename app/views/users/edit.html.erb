@@ -1,0 +1,23 @@
+<div id="page-wrapper">
+  <h1><i class="fa fa-user"></i> Hak Akses</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-building fa-fw"></i> Master</li>
+    <li><%= link_to users_path do %>Daftar User<% end %></li>
+    <li class="active"><i class="users icon"></i> Ubah User</li>
+  </ol>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Ubah User</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <%= render 'form' %>
+
+    </div>
+  </div>
+</div>
+
+</div>
