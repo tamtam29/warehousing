@@ -10,7 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap.min
+ *= require bootstrap
  *= require metisMenu.min
  *= require sb-admin-2
  *= require_tree .
@@ -18,4 +18,9 @@
 
 body{
   color: #73879C;
+}
+
+th{
+  background-color: #E6E9ED;
+  text-align: center;
 }

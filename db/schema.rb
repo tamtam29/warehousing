@@ -11,13 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811091824) do
+ActiveRecord::Schema.define(version: 20150815014032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "barang_masuks", force: :cascade do |t|
+    t.integer  "barang_id"
+    t.string   "no_transaksi"
+    t.integer  "jumlah",       default: 0
+    t.date     "tgl_masuk"
+    t.text     "note"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "barang_masuks", ["barang_id"], name: "index_barang_masuks_on_barang_id", using: :btree
+
+  create_table "barangs", force: :cascade do |t|
+    t.integer  "category_id"
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
+    t.float    "harga"
+  end
+
+  add_index "barangs", ["category_id"], name: "index_barangs_on_category_id", using: :btree
+
   create_table "categories", force: :cascade do |t|
     t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer  "barang_id"
+    t.integer  "jumlah",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "stocks", ["barang_id"], name: "index_stocks_on_barang_id", using: :btree
+
+  create_table "units", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

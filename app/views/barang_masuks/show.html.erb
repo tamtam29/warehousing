@@ -1,0 +1,45 @@
+<div id="page-wrapper">
+  <section class="content-header">
+    <h1><i class="fa fa-arrow-circle-left fa-fw"></i> Barang Masuk</h1>
+    <ol class="breadcrumb">
+      <li class="nonactive"><i class="fa fa-arrow-circle-left fa-fw"></i> Barang Masuk</li>
+      <li><%= link_to barang_masuks_path do %>Daftar Barang Masuk<% end %></li>
+      <li class="active">Detail Barang Masuk</li>
+    </ol>
+  </section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail Barang Masuk</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <br />
+        <div class="form-group">
+          <div class="row row_content">
+            <div class="title_row">No. Transaksi</div><div class="data_row"><%= @barang_masuk.no_transaksi %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Nama Barang</div><div class="data_row"><%= @barang_masuk.barang.name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Jumlah</div><div class="data_row"><%= @barang_masuk.jumlah %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Tgl. Masuk</div><div class="data_row"><%= @barang_masuk.tgl_masuk.strftime("%d-%m-%Y") %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Catatan</div><div class="data_row"><%= @barang_masuk.note %></div>
+          </div>
+        </div>
+        <%= link_to barang_masuks_path do %><i class="fa fa-reply-all"></i> Ke daftar barang masuk<% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>

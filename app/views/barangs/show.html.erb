@@ -1,0 +1,48 @@
+<div id="page-wrapper">
+  <section class="content-header">
+    <h1><i class="fa fa-building fa-fw"></i> Barang</h1>
+    <ol class="breadcrumb">
+      <li class="nonactive"><i class="fa fa-building fa-fw"></i> Master</li>
+      <li><%= link_to barangs_path do %>Daftar Barang<% end %></li>
+      <li class="active">Detail Barang</li>
+    </ol>
+  </section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail Barang</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <br />
+        <div class="form-group">
+          <div class="row row_content">
+            <div class="title_row">Kategori Barang</div><div class="data_row"><%= @barang.category.name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Kode Barang</div><div class="data_row"><%= @barang.code %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Nama Barang</div><div class="data_row"><%= @barang.name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Satuan</div><div class="data_row"><%= @barang.unit.name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Deskripsi Barang</div><div class="data_row"><%= @barang.description %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Harga Satuan (Rp.)</div><div class="data_row"><%= add_delimiter(@barang.harga) %></div>
+          </div>
+        </div>
+        <%= link_to barangs_path do %><i class="fa fa-reply-all"></i> Ke daftar barang<% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>

@@ -7,35 +7,34 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href=<%= main_app.root_path %>>Warehouse</a>
+    <a class="navbar-brand" href=<%= main_app.root_path %>><i class="fa fa-home"></i> <b><i>Warehouse</i></b></a>
   </div>
   <!-- /.navbar-header -->
 
   <ul class="nav navbar-top-links navbar-right">
-    <!-- /.dropdown -->
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-      </a>
-      <ul class="dropdown-menu dropdown-user">
-        <li><a href="#"><i class="fa fa-user fa-fw"></i> <%= current_user.username %></a>
-        </li>
-        <li class="divider"></li>
-        <li>
-          <%= link_to destroy_user_session_path, :method=>'delete', title: "Sign out" do%>
-          <i class="fa fa-sign-out"></i> Log out
-          <% end %>
-        </li>
-      </ul>
-      <!-- /.dropdown-user -->
+    <li class="username"><i class="fa fa-user"></i> <%= current_user.username %></li>
+    <li>
+      <%= link_to destroy_user_session_path, :method=>'delete', title: "Sign out", class: "text_logout" do%>
+      <i class="fa fa-sign-out"></i> Log out
+      <% end %>
     </li>
-    <!-- /.dropdown -->
   </ul>
   <!-- /.navbar-top-links -->
 
   <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
       <ul class="nav" id="side-menu">
+        <li class="sidebar-search">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+            </div>
+            <!-- /input-group -->
+        </li>
         <li>
           <%= link_to dashboards_path do %><i class="fa fa-dashboard fa-fw"></i> Dashboard<% end %>
         </li>
@@ -43,22 +42,28 @@
           <a href="#"><i class="fa fa-building fa-fw"></i> Master<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li>
-              <%= link_to users_path do %><i class="fa fa-user"></i> Hak Akses<% end %>
+              <%= link_to users_path do %>Hak Akses<% end %>
             </li>
             <li>
-              <%= link_to categories_path do%><i class="fa fa-archive"></i> Kategori Barang<% end %>
+              <%= link_to units_path do %>Satuan<% end %>
             </li>
             <li>
-              <%= link_to categories_path do%><i class="fa fa-briefcase"></i> Daftar Barang<% end %>
+              <%= link_to categories_path do %>Kategori Barang<% end %>
+            </li>
+            <li>
+              <%= link_to barangs_path do %> Daftar Barang<% end %>
             </li>
           </ul>
           <!-- /.nav-second-level -->
         </li>
         <li>
-          <a href="tables.html"><i class="fa fa-table fa-fw"></i> Barang Masuk</a>
+          <%= link_to stocks_path do %><i class="fa fa-line-chart fa-fw"></i> Stok Barang<% end %>
         </li>
         <li>
-          <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Barang Keluar</a>
+          <%= link_to barang_masuks_path do %><i class="fa fa-arrow-circle-left fa-fw"></i> Barang Masuk<% end %>
+        </li>
+        <li>
+          <a href="forms.html"><i class="fa fa-exchange fa-fw"></i> Barang Keluar</a>
         </li>
       </ul>
     </div>

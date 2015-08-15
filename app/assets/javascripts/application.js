@@ -14,5 +14,6 @@
 //= require metisMenu
 //= require sb-admin-2
 //= require jquery_ujs
-//= require turbolinks
+//= require moment-with-langs
+//= require bootstrap-datetimepicker
 //= require_tree .

@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
          # :recoverable, :rememberable, :trackable, :validatable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-
   def self.role_list
     %w(Admin User)
   end
