@@ -1,51 +1,49 @@
-<div id="page-wrapper">
-  <section class="content-header">
-    <h1><i class="fa fa-building fa-fw"></i> Kategori Barang</h1>
-    <ol class="breadcrumb">
-      <li class="nonactive"><i class="fa fa-building fa-fw"></i> Master</li>
-      <li><%= link_to categories_path do %>Daftar Kategori Barang<% end %></li>
-    </ol>
-  </section>
+<section class="content-header">
+  <h1><i class="fa fa-building fa-fw"></i> Kategori Barang</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-building fa-fw"></i> Master</li>
+    <li><%= link_to categories_path do %>Daftar Kategori Barang<% end %></li>
+  </ol>
+</section>
 
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>Daftar Kategori Barang</h2>
-          <div class="clearfix"></div>
-        </div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Daftar Kategori Barang</h2>
+        <div class="clearfix"></div>
+      </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-7">
-              <%= link_to new_category_path, class: "btn btn-primary btn-sm" do %><i class="fa fa-plus-square"></i> Tambah Kategori<% end %>
-            </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-7">
+            <%= link_to new_category_path, class: "btn btn-primary btn-sm" do %><i class="fa fa-plus-square"></i> Tambah Kategori<% end %>
           </div>
         </div>
-
-        <div class="x_content">
-          <table class="table table-striped table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>Kode</th>
-                <th>Kategori Barang</th>
-                <th colspan="2" width="2%">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @categories.each do |category| %>
-                <tr>
-                  <td><%= link_to category.code, category %></td>
-                  <td><%= link_to category.name, category %></td>
-                  <td><%= link_to edit_category_path(category), class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<% end %></td>
-                  <td><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do %><i class="fa fa-trash-o"></i> Delete<% end %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <div align="right"><%= paginate @categories %></div>
       </div>
+
+      <div class="x_content">
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Kode</th>
+              <th>Kategori Barang</th>
+              <th colspan="2" width="2%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @categories.each do |category| %>
+              <tr>
+                <td><%= link_to category.code, category %></td>
+                <td><%= link_to category.name, category %></td>
+                <td><%= link_to edit_category_path(category), class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<% end %></td>
+                <td><%= link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do %><i class="fa fa-trash-o"></i> Delete<% end %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div align="right"><%= paginate @categories %></div>
     </div>
   </div>
 </div>

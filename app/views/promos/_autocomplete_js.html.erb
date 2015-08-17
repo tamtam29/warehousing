@@ -1,0 +1,39 @@
+<script>
+$(function () {
+  // barang
+  var barangs = new Bloodhound({
+    datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.name); },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: "/barangs.json?query=%QUERY"
+    }
+  });
+
+  barangs.initialize();
+
+  $("#promo_barang_name").typeahead(null, {
+     displayKey: 'name',
+     source: barangs.ttAdapter(),
+     templates: {
+      suggestion: Handlebars.compile([
+        '<p class="repo-name">{{code}}, <span class="repo-description">{{name}}</span></p>'
+      ].join(''))
+    }
+  }).bind('typeahead:selected typeahead:autocompleted', function (event, datum) {
+    $("#promo_barang_name").val(datum.name);
+    $("#promo_barang_id").val(datum.id);
+  });
+
+  $("#promo_barang_name").blur(function() {
+    if ($("#promo_barang_id").val() != "") {
+      $.getJSON("/barangs/"+$("#promo_barang_id").val()+".json",function(json){
+        if ( json.length != 0 ) {
+          $("#promo_barang_name").val(json.name);
+        }
+      });
+    } else {
+      $("#promo_barang_name").val("");
+    }
+  });
+})
+</script>

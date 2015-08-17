@@ -1,0 +1,53 @@
+<section class="content-header">
+  <h1><i class="fa fa-gift fa-fw"></i> Promo Barang</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-gift fa-fw"></i> Promo</li>
+    <li><%= link_to promos_path do %>Daftar Promo Barang<% end %></li>
+  </ol>
+</section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Daftar Promo Barang</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-7">
+            <%= link_to new_promo_path, class: "btn btn-primary btn-sm" do %><i class="fa fa-plus-square"></i> Tambah Promo<% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="x_content">
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Promo</th>
+              <th>Barang</th>
+              <th>Discount (%)</th>
+              <th>Per Barang</th>
+              <th colspan="2" width="2%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @promos.each do |promo| %>
+              <tr>
+                <td><%= link_to promo.name, promo %></td>
+                <td><%= link_to promo.barang.name, promo %></td>
+                <td align="right"><%= link_to promo.disc, promo %></td>
+                <td align="right"><%= link_to promo.threshold_qty, promo %></td>
+                <td><%= link_to edit_promo_path(promo), class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<% end %></td>
+                <td><%= link_to promo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do %><i class="fa fa-trash-o"></i> Delete<% end %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div align="right"><%= paginate @promos %></div>
+    </div>
+  </div>
+</div>

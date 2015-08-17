@@ -1,39 +1,37 @@
-<div id="page-wrapper">
-  <section class="content-header">
-    <h1><i class="fa fa-line-chart fa-fw"></i> Stok Barang</h1>
-    <ol class="breadcrumb">
-      <li class="nonactive"><i class="fa fa-line-chart fa-fw"></i> Stok Barang</li>
-      <li><%= link_to stocks_path do %>Daftar Stok Barang<% end %></li>
-    </ol>
-  </section>
+<section class="content-header">
+  <h1><i class="fa fa-line-chart fa-fw"></i> Stok Barang</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-line-chart fa-fw"></i> Stok Barang</li>
+    <li><%= link_to stocks_path do %>Daftar Stok Barang<% end %></li>
+  </ol>
+</section>
 
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>Daftar Stok Barang</h2>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-          <table class="table table-striped table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>Barang</th>
-                <th>Stok</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @stocks.each do |stock| %>
-                <tr>
-                  <td><%= stock.barang.name %></td>
-                  <td><%= stock.jumlah %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <div align="right"><%= paginate @stocks %></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Daftar Stok Barang</h2>
+        <div class="clearfix"></div>
       </div>
+      <div class="x_content">
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Barang</th>
+              <th>Stok</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @stocks.each do |stock| %>
+              <tr>
+                <td><%= stock.barang.name %></td>
+                <td><%= stock.jumlah %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div align="right"><%= paginate @stocks %></div>
     </div>
   </div>
 </div>

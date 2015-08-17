@@ -11,7 +11,11 @@
   <% if user_signed_in? %>
     <div id="wrapper">
       <%= render 'layouts/menu' %>
-      <%= yield %>
+      <div id="page-wrapper">
+        <p <% if notice %> class="alert alert-success" <% end %> ><%= notice %></p>
+        <p <% if alert %> class="alert alert-danger" <% end %> ><%= alert %></p>
+        <%= yield %>
+      </div>
     </div>
     <!-- /#wrapper -->
   <% else %>

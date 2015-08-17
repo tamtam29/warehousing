@@ -1,0 +1,23 @@
+<section class="content-header">
+  <h1><i class="fa fa-gift fa-fw"></i> Promo Barang</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-gift fa-fw"></i> Promo</li>
+    <li><%= link_to promos_path do %>Daftar Promo Barang<% end %></li>
+    <li class="active">Buat Promo</li>
+  </ol>
+</section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Buat Promo</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <%= render 'form' %>
+
+    </div>
+  </div>
+</div>
+

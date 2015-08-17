@@ -4,7 +4,7 @@ class BarangMasuksController < ApplicationController
   # GET /barang_masuks
   # GET /barang_masuks.json
   def index
-    @barang_masuks = BarangMasuk.page(params[:page])
+    @barang_masuks = BarangMasuk.order("no_transaksi DESC").page(params[:page])
   end
 
   # GET /barang_masuks/1
@@ -15,6 +15,7 @@ class BarangMasuksController < ApplicationController
   # GET /barang_masuks/new
   def new
     @barang_masuk = BarangMasuk.new
+    @barang_masuk.tgl_masuk = DateTime.now.strftime("%Y-%m-%d")
   end
 
   # GET /barang_masuks/1/edit
@@ -25,9 +26,11 @@ class BarangMasuksController < ApplicationController
   # POST /barang_masuks.json
   def create
     @barang_masuk = BarangMasuk.new(barang_masuk_params)
+    @barang_masuk.no_transaksi = BarangMasuk.generate_no_transaksi
 
     respond_to do |format|
       if @barang_masuk.save
+        insert_to_stock(@barang_masuk)
         format.html { redirect_to @barang_masuk, notice: 'Barang masuk was successfully created.' }
         format.json { render :show, status: :created, location: @barang_masuk }
       else
@@ -70,5 +73,13 @@ class BarangMasuksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_masuk_params
       params.require(:barang_masuk).permit(:barang_id, :no_transaksi, :jumlah, :tgl_masuk, :note)
+    end
+
+    def increase_to_stock(barang_masuk)
+      stok_barang = Stock.find_by("barang_id = #{barang_masuk.barang_id}")
+      stok_barang ||= Stock.new
+      stok_barang.barang_id = barang_masuk.barang_id
+      stok_barang.jumlah = stok_barang.jumlah + barang_masuk.jumlah
+      stok_barang.save
     end
 end

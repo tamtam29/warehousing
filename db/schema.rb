@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815014032) do
+ActiveRecord::Schema.define(version: 20150817133222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150815014032) do
     t.datetime "updated_at",  null: false
     t.text     "description"
     t.float    "harga"
+    t.integer  "unit_id"
   end
 
   add_index "barangs", ["category_id"], name: "index_barangs_on_category_id", using: :btree
@@ -46,6 +47,18 @@ ActiveRecord::Schema.define(version: 20150815014032) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "promos", force: :cascade do |t|
+    t.integer  "barang_id"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "threshold_qty"
+    t.decimal  "disc"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "promos", ["barang_id"], name: "index_promos_on_barang_id", using: :btree
 
   create_table "stocks", force: :cascade do |t|
     t.integer  "barang_id"

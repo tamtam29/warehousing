@@ -1,10 +1,23 @@
+<%= render "autocomplete_js" %>
 <%= form_for @barang, :html => {:class => "form-horizontal form-label-left"} do |f| %>
+<% if @barang.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@barang.errors.count, "error") %> prohibited this barang from being saved:</h2>
+
+  <ul>
+    <% @barang.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
   <div class="x_content">
     <br />
     <div class="form-group">
       <%= f.label "Kategori Barang", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <%= select_tag "barang[category_id]", options_from_collection_for_select(Category.all, :id, :name), class: "form-control input-sm col-md-7 col-xs-12" %>
+        <%= hidden_field_tag "barang[category_id]", @barang.category_id %>
+        <%= text_field_tag "barang[category_name]", @barang.category ? @barang.category.name : nil, class: "form-control input-sm col-md-7 col-xs-12", placeholder: "Pilih Kategori Barang", autocomplete: "off", :data => {:required => 'true', type: 'alphabet'} %>
       </div>
     </div>
     <div class="form-group">

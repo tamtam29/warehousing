@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   # devise :database_authenticatable, :registerable,
          # :recoverable, :rememberable, :trackable, :validatable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  validates :first_name, presence: true
+  validates :username, uniqueness: true, presence: true
 
   def self.role_list
     %w(Admin User)

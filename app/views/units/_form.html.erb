@@ -1,4 +1,15 @@
 <%= form_for @unit, :html => {:class => "form-horizontal form-label-left"} do |f| %>
+<% if @unit.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
+
+  <ul>
+    <% @unit.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
   <div class="x_content">
     <br />
     <div class="form-group">

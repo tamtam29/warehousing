@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :promos
   root to: 'dashboards#index'
   devise_for :users
   resources :users

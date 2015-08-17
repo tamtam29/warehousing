@@ -1,3 +1,4 @@
+/* ---- FORM ----*/
 .x_panel {
   position: relative;
   width: 100%;
@@ -17,13 +18,11 @@
   -ms-transition: all .2s ease;
   transition: all .2s ease;
 }
-
 .x_title {
   border-bottom: 1px solid #E6E9ED;
   padding: 1px 5px 6px;
   margin-bottom: 10px;
 }
-
 .x_title h2 {
   margin: 5px 0 6px;
   float: left;
@@ -33,11 +32,9 @@
   white-space: nowrap;
   font-size: 18px;
 }
-
 #page-wrapper h1 {
   font-size: 24px;
 }
-
 .x_content {
   padding: 0 5px 6px;
   position: relative;
@@ -47,7 +44,6 @@
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
 }
-
 .ln_solid {
   border-top: 1px solid #e5e5e5;
   color: #ffffff;
@@ -55,7 +51,6 @@
   height: 1px;
   margin: 20px 0px 15px 0;
 }
-
 .clearfix:after,
 form:after {
   content: ".";
@@ -64,26 +59,18 @@ form:after {
   clear: both;
   visibility: hidden;
 }
+/* ---- end FORM ----*/
 
-.nav li.active {
-  /*border-left: 5px solid #1ABB9C;*/
-}
-
-.dropdown .user{
-  background-color: red;
-}
-
+/* logout + username */
 .text_logout{
   color: white;
 }
-
 .username{
   color: white
 }
+/* end logout + username */
 
-/*--------------
-   Pagination
----------------*/
+/*--- Pagination ---*/
 .pagination{
   margin: 0px 0px 10px 0px;
 }
@@ -111,37 +98,38 @@ form:after {
   -moz-box-shadow: none;
   box-shadow: none;
 }
+/*--- end Pagination ---*/
 
+/*--- menu samping collapse ---*/
 body ul.nav.nav-second-level.collapse.in li:before {
-    background: #337ab7;
-    bottom: auto;
-    content: "";
-    height: 6px;
-    left: 33px;
-    margin-top: 9px;
-    position: absolute;
-    right: auto;
-    width: 6px;
-    z-index: 1;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
+  background: #337ab7;
+  bottom: auto;
+  content: "";
+  height: 6px;
+  left: 33px;
+  margin-top: 9px;
+  position: absolute;
+  right: auto;
+  width: 6px;
+  z-index: 1;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
 }
-
 body ul.nav.nav-second-level.collapse.in li:after {
-    /*border-left: 1px solid #337ab7;*/
-    bottom: 0;
-    content: "";
-    left: 37px;
-    position: absolute;
-    top: 0;
+  bottom: 0;
+  content: "";
+  left: 37px;
+  position: absolute;
+  top: 0;
 }
+/*--- end menu samping collapse ---*/
 
+/*--- breadcrumb ---*/
 .content-header{
   position: relative;
   padding: 2px 0 0 0;
 }
-
 .content-header .breadcrumb {
   float: right;
   background: transparent;
@@ -154,3 +142,60 @@ body ul.nav.nav-second-level.collapse.in li:after {
   right: 10px;
   border-radius: 2px;
 }
+/*--- end breadcrumb ---*/
+
+/*--- jquery datepicker ---*/
+div.ui-datepicker {
+ font-size:12px;
+}
+/*--- end jquery datepicker ---*/
+
+/*--- alert + notice ---*/
+#error_explanation {
+  padding-left: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+#error_explanation h2 {
+  font-size: 14px;
+  margin-top: 8px;
+}
+#error_explanation ul {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.alert {
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.alert.alert-success,
+.alert.alert-danger
+ {
+  font-size: 13px;
+}
+/*--- end alert + notice ---*/
+
+/*--- typeahead ---*/
+.repo-name{
+  font-size: 12px;
+  line-height: 18px;
+}
+.repo-description{
+  font-size: 12px !important;
+  line-height: 14px;
+  font-weight: normal;
+}
+.tt-dropdown-menu{
+  border-radius: 0px !important;
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+.tt-suggestion{
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+/*--- end typeahead ---*/

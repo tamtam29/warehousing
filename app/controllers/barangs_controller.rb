@@ -4,7 +4,15 @@ class BarangsController < ApplicationController
   # GET /barangs
   # GET /barangs.json
   def index
-    @barangs = Barang.page(params[:page])
+    query = params[:query] ? params[:query].downcase : ""
+    respond_to do |format|
+      format.html {
+        @barangs = Barang.page(params[:page])
+      }
+      format.json {
+        @barangs = Barang.where("(lower(code) like '%#{query}%' or lower(name) like '%#{query}%')")
+      }
+    end
   end
 
   # GET /barangs/1

@@ -1,0 +1,43 @@
+<section class="content-header">
+  <h1><i class="fa fa-gift fa-fw"></i> Promo Barang</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-gift fa-fw"></i> Promo</li>
+    <li><%= link_to promos_path do %>Daftar Promo Barang<% end %></li>
+    <li class="active">Detail Promo</li>
+  </ol>
+</section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail Promo Barang</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <br />
+        <div class="form-group">
+          <div class="row row_content">
+            <div class="title_row">Barang</div><div class="data_row"><%= @promo.barang.name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Promo</div><div class="data_row"><%= @promo.name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Deskripsi</div><div class="data_row"><%= @promo.description %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Discount (%)</div><div class="data_row"><%= @promo.disc %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Per Barang</div><div class="data_row"><%= @promo.threshold_qty %></div>
+          </div>
+        </div>
+        <%= link_to promos_path do %><i class="fa fa-reply-all"></i> Ke promo barang<% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+

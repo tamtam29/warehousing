@@ -1,16 +1,23 @@
+<%= render "autocomplete_js" %>
 <%= form_for @barang_masuk, :html => {:class => "form-horizontal form-label-left"} do |f| %>
+<% if @barang_masuk.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@barang_masuk.errors.count, "error") %> prohibited this barang masuk from being saved:</h2>
+
+  <ul>
+    <% @barang_masuk.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
   <div class="x_content">
     <br />
     <div class="form-group">
-      <%= f.label :no_transaksi, "No. Transaksi", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <%= f.text_field :no_transaksi, class: "form-control input-sm col-md-7 col-xs-12" %>
-      </div>
-    </div>
-    <div class="form-group">
       <%= f.label "Barang", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <%= select_tag "barang_masuk[barang_id]", options_from_collection_for_select(Barang.all, :id, :name), class: "form-control input-sm col-md-7 col-xs-12" %>
+        <%= hidden_field_tag "barang_masuk[barang_id]", @barang_masuk.barang_id %>
+        <%= text_field_tag "barang_masuk[barang_name]", @barang_masuk.barang ? @barang_masuk.barang.name : nil, id: "barang_masuk_barang_name", class: "form-control input-sm col-md-7 col-xs-12", placeholder: "Pilih Barang", autocomplete: "off", :data => {:required => 'true', type: 'alphabet'} %>
       </div>
     </div>
     <div class="form-group">
@@ -22,7 +29,8 @@
     <div class="form-group">
       <%= f.label :tgl_masuk, "Tanggal Masuk", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <%= f.date_field :tgl_masuk, class: "form-control input-sm col-md-7 col-xs-12" %>
+        <%= f.text_field :tgl_masuk, class: "form-control input-sm col-md-7 col-xs-12" %>
+        <!-- <p style="font-size:10px;padding:1px;">Format: 'YYYY-MM-DD' | Ex. 2015-01-31</p> -->
       </div>
     </div>
     <div class="form-group">
@@ -42,3 +50,9 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  $(function() {
+    $( "#barang_masuk_tgl_masuk" ).datepicker();
+  });
+</script>
