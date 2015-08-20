@@ -11,10 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817133222) do
+ActiveRecord::Schema.define(version: 20150820053024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "barang_keluar_barangs", force: :cascade do |t|
+    t.integer  "barang_keluar_category_id"
+    t.integer  "unit_id"
+    t.string   "code"
+    t.string   "name"
+    t.text     "description"
+    t.float    "harga",                     default: 0.0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "barang_keluar_barangs", ["barang_keluar_category_id"], name: "index_barang_keluar_barangs_on_barang_keluar_category_id", using: :btree
+  add_index "barang_keluar_barangs", ["unit_id"], name: "index_barang_keluar_barangs_on_unit_id", using: :btree
+
+  create_table "barang_keluar_categories", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "barang_keluar_promos", force: :cascade do |t|
+    t.integer  "barang_keluar_barang_id"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "threshold_qty"
+    t.float    "disc",                    default: 0.0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "barang_keluar_promos", ["barang_keluar_barang_id"], name: "index_barang_keluar_promos_on_barang_keluar_barang_id", using: :btree
+
+  create_table "barang_keluars", force: :cascade do |t|
+    t.string   "no_transaksi"
+    t.date     "tgl_keluar"
+    t.float    "grand_total",  default: 0.0
+    t.float    "bayar",        default: 0.0
+    t.float    "kembalian",    default: 0.0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "barang_masuks", force: :cascade do |t|
     t.integer  "barang_id"
@@ -30,16 +73,17 @@ ActiveRecord::Schema.define(version: 20150817133222) do
 
   create_table "barangs", force: :cascade do |t|
     t.integer  "category_id"
+    t.integer  "unit_id"
     t.string   "code"
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.text     "description"
-    t.float    "harga"
-    t.integer  "unit_id"
+    t.float    "harga",       default: 0.0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "barangs", ["category_id"], name: "index_barangs_on_category_id", using: :btree
+  add_index "barangs", ["unit_id"], name: "index_barangs_on_unit_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "code"
@@ -48,12 +92,24 @@ ActiveRecord::Schema.define(version: 20150817133222) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "detail_barang_keluars", force: :cascade do |t|
+    t.integer  "barang_keluar_id"
+    t.integer  "barang_keluar_barang_id"
+    t.integer  "jumlah",                  default: 0
+    t.float    "total_harga",             default: 0.0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "detail_barang_keluars", ["barang_keluar_barang_id"], name: "index_detail_barang_keluars_on_barang_keluar_barang_id", using: :btree
+  add_index "detail_barang_keluars", ["barang_keluar_id"], name: "index_detail_barang_keluars_on_barang_keluar_id", using: :btree
+
   create_table "promos", force: :cascade do |t|
     t.integer  "barang_id"
     t.string   "name"
     t.string   "description"
     t.integer  "threshold_qty"
-    t.decimal  "disc"
+    t.float    "disc"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

@@ -199,3 +199,33 @@ div.ui-datepicker {
   padding-right: 5px !important;
 }
 /*--- end typeahead ---*/
+
+/*--- table barang keluar ---*/
+.table_barang_keluar th{
+  padding: 2px !important;
+}
+.table_barang_keluar td {
+  vertical-align: middle !important;
+  padding: 2px !important;
+}
+.table_barang th{
+  padding: 2px !important;
+}
+.table_barang td {
+  vertical-align: middle !important;
+  padding: 2px !important;
+  cursor:pointer;
+}
+.form-control.input-sm.field_barang_keluar {
+  border-radius: 0 !important;
+}
+.grandtotal {
+  margin-top: 17px;
+  font-size: 20px;
+  clear: both;
+}
+.bayar {
+  font-size: 20px;
+  clear: both;
+}
+/*--- end table barang keluar ---*/

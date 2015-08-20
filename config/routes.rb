@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :promos
   root to: 'dashboards#index'
   devise_for :users
   resources :users
@@ -7,7 +6,10 @@ Rails.application.routes.draw do
   resources :units
   resources :categories
   resources :barangs
+  resources :promos
   resources :stocks
   resources :barang_masuks
+  resources :barang_keluars
+  resources :detail_barang_keluars
 
 end

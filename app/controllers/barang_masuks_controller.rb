@@ -30,7 +30,7 @@ class BarangMasuksController < ApplicationController
 
     respond_to do |format|
       if @barang_masuk.save
-        insert_to_stock(@barang_masuk)
+        increase_to_stock(@barang_masuk)
         format.html { redirect_to @barang_masuk, notice: 'Barang masuk was successfully created.' }
         format.json { render :show, status: :created, location: @barang_masuk }
       else

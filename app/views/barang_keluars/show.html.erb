@@ -1,0 +1,106 @@
+<section class="content-header">
+  <h1><i class="fa fa-exchange fa-fw"></i> Barang Keluar</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-building fa-fw"></i> Barang Keluar</li>
+    <li><%= link_to barang_keluars_path do %>Barang Keluar<% end %></li>
+    <li class="avtive">Detail Barang Keluar</li>
+  </ol>
+</section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail Barang Keluar</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <br />
+        <div class="form-group">
+
+          <div class="x_content">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= label_tag :tgl_keluar, "Tanggal Keluar", class: "col-sm-4 control-label" %>
+                  <div class="col-sm-8">
+                    <%= label_tag :label_tgl_keluar, @barang_keluar.tgl_keluar, class: "col-sm-8 control-label" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group bayar">
+                  <%= label_tag :bayar, "Tunai", class: "col-sm-4 control-label"  %>
+                  <div class="col-sm-8">
+                    <%= label_tag :label_bayar, "Rp. #{add_delimiter(@barang_keluar.bayar)}", class: "col-sm-8 control-label" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <table class="table table-striped table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th width="10%">Kode</th>
+                  <th>Nama Barang</th>
+                  <th width="10%">Jumlah</th>
+                  <th width="5%">Satuan</th>
+                  <th width="15%">Harga (Rp.)</th>
+                  <th width="15%">Disc. (%)</th>
+                  <th width="15%">Total (Rp.)</th>
+                </tr>
+                <tbody>
+                  <% @barang_keluar.detail_barang_keluars.each do |detail_barang_keluar| %>
+                    <tr>
+                      <td align="center"><%= detail_barang_keluar.barang_keluar_barang.code %></td>
+                      <td><%= detail_barang_keluar.barang_keluar_barang.name %></td>
+                      <td align="right"><%= detail_barang_keluar.jumlah %></td>
+                      <td align="center"><%= detail_barang_keluar.barang_keluar_barang.unit.name %></td>
+                      <td align="right"><%= add_delimiter(detail_barang_keluar.barang_keluar_barang.harga) %></td>
+                      <% if detail_barang_keluar.barang_keluar_barang.barang_keluar_promo %>
+                        <td align="right"><%= detail_barang_keluar.barang_keluar_barang.barang_keluar_promo.disc.to_s+" / "+ detail_barang_keluar.barang_keluar_barang.barang_keluar_promo.threshold_qty.to_s+" Barang" %></td>
+                      <% else %>
+                        <td align="right">-</td>
+                      <% end %>
+                      <td align="right"><%= add_delimiter(detail_barang_keluar.total_harga) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </thead>
+            </table>
+
+            <div class="row">
+              <div class="col-md-6" style="border-right: solid 1px #ddd;">
+                <div class="form-group">
+                  <%= label_tag :bayar, "Tunai (Rp.)", class: "col-sm-4 control-label"  %>
+                  <div class="col-sm-8">
+                    <%= label_tag :label_bayar, add_delimiter(@barang_keluar.bayar), class: "col-sm-8 control-label" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= label_tag :kembalian, "Kembalian (Rp.)", class: "col-sm-4 control-label"  %>
+                  <div class="col-sm-8">
+                    <%= label_tag :label_kembalian, add_delimiter(@barang_keluar.kembalian), class: "col-sm-8 control-label" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group grandtotal">
+                  <%= label_tag :grand_total, "Grand Total", class: "col-sm-4 control-label"  %>
+                  <div class="col-sm-8">
+                    <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.grand_total)}", class: "col-sm-8 control-label" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ln_solid"></div>
+
+          </div>
+        </div>
+        <%= link_to new_barang_keluar_path do %><i class="fa fa-reply-all"></i> Ke transaksi baru<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

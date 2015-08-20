@@ -5,7 +5,7 @@ class CreatePromos < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.integer :threshold_qty
-      t.decimal :disc
+      t.float :disc
 
       t.timestamps null: false
     end

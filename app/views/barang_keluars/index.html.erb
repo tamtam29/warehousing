@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Barang Keluars</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>No transaksi</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @barang_keluars.each do |barang_keluar| %>
+      <tr>
+        <td><%= link_to barang_keluar.no_transaksi, barang_keluar %></td>
+        <td><%= link_to 'Show', barang_keluar %></td>
+        <td><%= link_to 'Edit', edit_barang_keluar_path(barang_keluar) %></td>
+        <td><%= link_to 'Destroy', barang_keluar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Barang keluar', new_barang_keluar_path %>

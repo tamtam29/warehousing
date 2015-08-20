@@ -1,0 +1,201 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+
+     <div class="x_content">
+        <div class="table_barang">
+          <%= render 'table_barang' %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%= form_for(@barang_keluar) do |f| %>
+<div class="table_barang_keluar">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+
+      <%= f.fields_for :detail_barang_keluars do |detail_barang_keluar| %>
+      <div class="x_content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :tgl_keluar, "Tanggal Keluar", class: "col-sm-4 control-label" %>
+              <div class="col-sm-8">
+                <%= f.text_field :tgl_keluar, class: "form-control input-sm field_barang_keluar" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group bayar">
+              <%= f.label :bayar, "Tunai", class: "col-sm-4 control-label"  %>
+              <div class="col-sm-8">
+                <%= label_tag :label_bayar, 'Rp. 0', class: "col-sm-12 control-label", :id=>"label_bayar" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+          <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th width="10%">Kode</th>
+              <th>Nama Barang</th>
+              <th width="10%">Jumlah</th>
+              <th width="5%">Satuan</th>
+              <th width="15%">Harga (Rp.)</th>
+              <th width="15%">Disc. (%)</th>
+              <th width="15%">Total (Rp.)</th>
+              <th width="2%">Action</th>
+            </tr>
+            <tbody class="append_body">
+            </tbody>
+          </thead>
+          </table>
+
+          <div class="row">
+            <div class="col-md-6" style="border-right: solid 1px #ddd;">
+              <div class="form-group">
+                <%= f.label :bayar, "Tunai (Rp.)", class: "col-sm-4 control-label"  %>
+                <div class="col-sm-8">
+                  <%= f.text_field :bayar, class: "form-control input-sm field_barang_keluar", value: 0, onKeyUp: "hitung_kembalian()" %>
+                </div>
+              </div>
+              <div class="form-group">
+                <%= f.label :kembalian, "Kembalian (Rp.)", class: "col-sm-4 control-label"  %>
+                <div class="col-sm-8">
+                  <%= text_field_tag :field_kembalian, '', class: "form-control input-sm field_barang_keluar", value: 0, readonly: true %>
+                  <%= hidden_field_tag :kembalian, '', :name=>"barang_keluar[kembalian]", :id=>"barang_keluar_kembalian" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group grandtotal">
+                <%= f.label :grand_total, "Grand Total", class: "col-sm-4 control-label"  %>
+                <div class="col-sm-8">
+                  <%= label_tag :label_grand_total, 'Rp. 0', class: "col-sm-12 control-label", :id=>"label_grand_total" %>
+                  <%= hidden_field_tag :grand_total, '', :name=>"barang_keluar[grand_total]", :id=>"barang_keluar_grand_total" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="x_content">
+          <br>
+          <div class="form-group" style="border-top: solid 1px #ddd;">
+            <br>
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+              <%= link_to "Cancel", new_barang_keluar_path, class: "btn btn-primary btn-sm" %>
+              <%= submit_tag params[:action] == 'new' ? "Create" : "Update", class: "btn btn-success btn-sm" %>
+            </div>
+          </div>
+          <br>
+        </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<script>
+  $(function() {
+    $( "#barang_keluar_tgl_keluar" ).datepicker();
+  });
+
+  var index = 0;
+  var arr_id = [];
+  var row_id = [];
+  function tambahBarang(id) {
+    var item_detail = ""
+    $.getJSON("/stocks/"+id+".json",function(json){
+
+      if (arr_id.indexOf(id) === -1){
+        arr_id.push(id)
+        row_id.push(index)
+        item_detail += "<tr id='row_item_"+ index +"'>"
+        item_detail += "<td align='center'>"+ json.code +"</td>";
+        item_detail += "<td> <input type='hidden' id='barang_id_"+ index +"' class='form-control' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][barang_id]' value="+ json.barang_id +">"+ json.name +"</td>";
+        item_detail += "<td align='right'> <input onKeyUp='hitung_total("+ index +","+ json.jumlah +")' id='jumlah_"+ index +"' class='form-control input-sm' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][jumlah]' value=0></td>";
+        item_detail += "<td align='center'>"+ json.unit +"</td>";
+        item_detail += "<td align='right'><span id='harga_"+ index +"'>"+ accounting.formatMoney(json.harga, "", 2) +"</span></td>";
+        if (json.disc == null){
+          item_detail += "<td align='right'><span id='discount_"+ index +"'>-</span></td>";
+        }
+        else{
+          item_detail += "<td align='right'><span id='discount_"+ index +"'>"+ json.disc+" / "+json.threshold_qty+" Barang</span></td>";
+        }
+        item_detail += "<td align='right'><input type='hidden' id='field_total_harga_"+ index +"' class='form-control' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][total_harga]' value=0><span id='total_harga_"+ index+ "'>"+ 0 +"</span></td>";
+        item_detail += "<td align='center'><a class='btn btn-danger btn-xs' onclick='delete_row("+ index +", "+ id +")'><i class='fa fa-times'></i></a> </td>";
+        item_detail += "</tr>";
+
+        $('.append_body').append(item_detail);
+        hitung_total(index)
+        index += 1
+      } else {
+        alert("Maaf, Barang sudah ada");
+      }
+
+    });
+  }
+  function delete_row(index, id){
+    $("[id^='row_item_"+index+"']").remove();
+    for (i=0; i<arr_id.length; i++){
+      if (arr_id[i] == id){
+        arr_id.splice(i, 1);
+        row_id.splice(i, 1);
+      }
+    }
+    hitung_grand_total()
+    hitung_kembalian()
+  }
+  function hitung_total(index, max_jumlah){
+    if (max_jumlah == undefined){
+      max_jumlah = 0;
+    }
+    var jumlah = parseFloat($("[id^='jumlah_"+index+"']").val());
+    if (jumlah <= max_jumlah) {
+      var harga = parseFloat(accounting.unformat($("[id^='harga_"+index+"']").text(), "."));
+      var discount = $("[id^='discount_"+index+"']").text();
+      if (discount != "-"){
+        var get_times_disc = Math.floor(jumlah / parseFloat(discount.split("/")[1]));
+        var harga_sebelum_disc = (get_times_disc * parseFloat(discount.split("/")[1]) * harga);
+        var potongan = ((parseFloat(discount.split("/")[0]) / 100) * harga_sebelum_disc);
+        var harga_setelah_disc = harga_sebelum_disc - potongan;
+        var total_harga = parseFloat(harga_setelah_disc) + ((jumlah - (get_times_disc * parseFloat(discount.split("/")[1]))) * harga);
+      } else {
+        var total_harga = jumlah * harga;
+      }
+      $("[id^='total_harga_"+index+"']").text(accounting.formatMoney(total_harga, "", 2));
+      $("[id^='field_total_harga_"+index+"']").val(total_harga);
+      hitung_grand_total()
+    } else {
+      $("[id^='jumlah_"+index+"']").val(max_jumlah);
+      hitung_total(index, max_jumlah)
+      alert("Maaf, Jumlah barang melebihi stok");
+    }
+  }
+  function hitung_grand_total(){
+    var grand_total = 0;
+    for (i=0; i<row_id.length; i++){
+      var tot_harga = parseInt(accounting.unformat($("[id^='total_harga_"+row_id[i]+"']").text(), "."));
+      grand_total = tot_harga + grand_total;
+    }
+    $("#barang_keluar_grand_total").val(grand_total);
+    $("#label_grand_total").text("Rp. "+accounting.formatMoney(grand_total, "", 2));
+  }
+  function hitung_kembalian(){
+    var grand_total = parseFloat(accounting.unformat($("#barang_keluar_grand_total").val(), "."));
+    var bayar = $("#barang_keluar_bayar").val();
+    var kembalian = bayar - grand_total;
+    $("#barang_keluar_kembalian").val(kembalian);
+    $("#field_kembalian").val(accounting.formatMoney(kembalian, "", 2));
+    $("#label_bayar").text("Rp. "+accounting.formatMoney(bayar, "", 2));
+  }
+</script>
