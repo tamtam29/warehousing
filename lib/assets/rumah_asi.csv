@@ -1,0 +1,106 @@
+Kode Barang,Nama Produk,STOK,Barang Masuk,Barang Keluar,Harga Jual,Kategori
+BJ001,My Litlle Whiz,0,4,0,55500,Pakaian
+BJ002,Baju Muslim setelan,0,3,0,80500,Pakaian
+BJ003,Nezumi Stell Kupu,0,3,0,90500,Pakaian
+BJ004,Nezumi Stell cln pdk,0,4,0,75500,Pakaian
+BJ005,Baju Cewek Tutu,0,4,0,80500,Pakaian
+BJ006,Nezumi Stell pita cln pjg,0,3,0,95500,Pakaian
+BJ007,Baju Kaos+ celana jeans,0,3,0,99500,Pakaian
+BJ008,Baju + Celana Renata Junior,0,6,0,99500,Pakaian
+BJ009,Baju Menyusui Pizerl maternity lgn pjg,0,2,0,190500,Pakaian
+BJ010,Baju Menyusui Pizerl maternity lgn pdk,0,3,0,190500,Pakaian
+BJ011,Kaos Stell Peek A boo,0,3,0,79500,Pakaian
+BJ012,M2N Kids,0,3,0,150500,Pakaian
+BJ013,Ka el Stell,0,4,0,85500,Pakaian
+BJ014,Vinata 6 pieces set,0,2,0,59500,Pakaian
+BJ015,desan Pendek,0,12,0,59500,Pakaian
+BJ016,Obl Ridges S,0,12,0,25500,Pakaian
+BJ017,Obl Ridges M,0,12,0,27500,Pakaian
+BJ018,Obl Ridges L,0,12,0,29500,Pakaian
+BJ019,Bendito,0,12,0,50500,Pakaian
+BJ020,Baju Kodok Chiby,0,4,0,89500,Pakaian
+BJ021,Baju Kodok Disney,0,6,0,59500,Pakaian
+BJ022,Carter Jumper pendek 3 bln,0,1,0,28500,Pakaian
+BJ023,Carter Jumper pendek 6 bln,0,3,0,28500,Pakaian
+BJ024,Carter Jumper pendek 9 bln,0,4,0,28500,Pakaian
+BJ025,Carter Jumper pendek 12 bln,0,4,0,28500,Pakaian
+BJ026,Carter Jumper panjang 6 bln,0,4,0,31500,Pakaian
+BJ027,Carter Jumper panjang 9 bln,0,4,0,31500,Pakaian
+BJ028,Carter Jumper panjang 12 bln,0,4,0,31500,Pakaian
+PTK001,Sheep OB Prem+C511 KRT,0,6,0,78500,Pakaian
+PTK002,Bear/B OBL  Kcng+511 XL,0,5,0,85500,Pakaian
+PTK003,Big V2 Hansop PD+PD,0,6,0,59500,Pakaian
+PTK004,Panda V2 Rok V10,0,6,0,81500,Pakaian
+PTK005,Precious Girl V2 Rok V10,0,6,0,75500,Pakaian
+PTK006,Basket V2 Rok V6,0,6,0,68500,Pakaian
+PTK007,Animal V2 Rok V3,0,6,0,61500,Pakaian
+PTK008,Dino V2 Rok V3,0,6,0,64500,Pakaian
+PTK009,Catty Rok R1,0,6,0,62500,Pakaian
+PTK010,Action Rok R8,0,6,0,73500,Pakaian
+PTK011,Catty Jacket TL-L,0,6,0,95500,Pakaian
+PTK012,Teddy V2 Rok V1,0,6,0,49500,Pakaian
+PTK013,Jerapah Sport V2 Rok V1,0,6,0,53500,Pakaian
+PTK014,Surf OB AMP +C511 M,0,6,0,72500,Pakaian
+PTK015,Tiger V2 S. Sport +7/8 M,0,6,0,89500,Pakaian
+PTK016,Animal V2 S. Sport +7/8 L,0,6,0,99500,Pakaian
+PTK017,Sheep Rok R5,0,6,0,66500,Pakaian
+PTK018,Zebra V2 Rok V7 + 3/4 Karet / M,0,6,0,61500,Pakaian
+PTK019,Happy/ B V2 Rok V6,0,6,0,55500,Pakaian
+PTK020,Basket V2 Obl pd +7/8 L,0,6,0,112500,Pakaian
+PTK021,Bus V2 Obl pd+ 7/8 - L,0,6,0,93500,Pakaian
+PTK022,Gajah duo OBPJ Bis +CPj Bis-L,0,6,0,99500,Pakaian
+PTK023,Cute-B OB Singlet Sport + C511L,0,6,0,79500,Pakaian
+CLD001,Pempem full Motif Velcro + insert microfiber,0,1,0,94500,Cloth Diaper
+CLD002,Pempem full Motif Velcro + insert Litty ,0,1,0,92500,Cloth Diaper
+CLD003,Pempem Snap + Insert Litty ,0,3,0,87500,Cloth Diaper
+CLD004,Pempem Snap + Insert Microfiber,0,3,0,89500,Cloth Diaper
+CLD005,Babyland Microfiber + 2 Insert,0,2,0,84500,Cloth Diaper
+CLD006,Clodi Nifo Kids Minky,0,7,0,78500,Cloth Diaper
+CLD007,Clodi Nifo Kids Printed,0,3,0,66500,Cloth Diaper
+CLD008,Cluebebe Pocket Classic Tutu + Insert Large Stay Dry,0,1,0,107500,Cloth Diaper
+CLD009,Cluebebe Coveria Petit Solid + Insert Small Stay Dry,0,1,0,75500,Cloth Diaper
+CLD010,Cluebebe Pocket Classic Snap Motif + Insert Large Stay Dry,0,3,0,96500,Cloth Diaper
+CLD011,Cluebebe Coveria Petit Motif + Insert Small Stay Dry,0,3,0,84500,Cloth Diaper
+INS 001,Insert Microfiber NFK,0,5,0,23500,Cloth Diaper
+INS 002,Insert Large Stay Dry Cluebebe,0,3,0,34500,Cloth Diaper
+NC001,Nursing Cover Annandapers,0,1,0,72500,Perlengkapan Bayi
+NC002,Nursing Cover Akrababy,0,1,0,98500,Perlengkapan Bayi
+BM001,Bantal Menyusui Akrababy,0,2,0,189500,Perlengkapan Bayi
+BDG001,Bedong Instan motif,0,1,0,62500,Perlengkapan Bayi
+BDG002,Bedong Instan polos,0,1,0,60500,Perlengkapan Bayi
+IG001,Ice Gell Besar,0,10,0,23500,Pendukung ASI
+IG002,Ice Pack Kotak,0,2,0,49500,Pendukung ASI
+IG003,Ice Pack Lengkung 3,0,2,0,56500,Pendukung ASI
+SA001,Botol ASI Ciki,0,2,0,55500,Pendukung ASI
+SA002,Botol Asi BKA Ecer,0,24,0,8500,Pendukung ASI
+SA003,Botol ASI Bka boX Isi 8 pcs,0,3,0,60500,Pendukung ASI
+SA004,Botol ASI tutup karet rekondisi,0,30,0,3500,Pendukung ASI
+SA005,Kantong ASI Momo,0,2,0,45500,Pendukung ASI
+SA006,Kantong ASI Natur,0,2,0,55500,Pendukung ASI
+SA007,Kantong ASI Coloria,0,2,0,89500,Pendukung ASI
+SA008,Kantong ASI Baby Grow,0,4,0,63500,Pendukung ASI
+CB001,Cooler Bag Z Two,0,3,0,78500,Pendukung ASI
+CB002,Cooler Bag Gabag Groofy,0,1,0,230500,Pendukung ASI
+CB003,Cooler Bag Gabag Milky Cow,0,1,0,199500,Pendukung ASI
+CB004,Cooler Bag Gabag Sling Flower,0,1,0,190500,Pendukung ASI
+CB005,Cooler Bag Gabag Zebra,0,1,0,209500,Pendukung ASI
+BP001,Breastpump Manual Bambi,0,3,0,149500,Breastpump
+BP002,Breastpump Manual Crown,0,1,0,161500,Breastpump
+BP003,Breastpump Manual IQ Baby,0,1,0,159500,Breastpump
+BP004,Breastpump Manual Litlle Giant,0,1,0,179500,Breastpump
+BP005,Breastpump Manual Natur,0,1,0,245500,Breastpump
+BP006,Breastpump Manual Unimom,0,1,0,343500,Breastpump
+BP007,Breastpump Electric IQ Baby,0,1,0,349500,Breastpump
+BP008,Breastpump Electric Litlle Giant,0,2,0,385500,Breastpump
+WRS001,Warmer and Sterilizer Little Giant,0,2,0,239500,Perlengkapan Bayi
+WRS002,Warmer Crown 4 in 1,0,1,0,199500,Perlengkapan Bayi
+WRS003,Takahi Slow Cooker,0,1,0,619500,MPASI
+ACC001,Pregnancy Belt Annanda,0,1,0,82500,Perlengkapan Bayi
+ACC002,Pregnancy Belt New Life,0,1,0,182500,Perlengkapan Bayi
+ACC003,Cupfeeder Unimom,0,5,0,20500,Pendukung ASI
+ACC004,Fress feeder Munchkin,0,1,0,99500,MPASI
+ACC005,Fress feeder Set + Grinder Munchkin,0,1,0,199500,MPASI
+ACC006,Niplle Shield Farlin,0,1,0,56500,Perlengkapan Bayi
+ACC007,ASI Booster,0,2,0,149500,Pendukung ASI
+ACC008,Mama Soya,0,2,0,37500,Pendukung ASI
+ACC009,Skidder,0,4,0,51500,Perlengkapan Bayi
