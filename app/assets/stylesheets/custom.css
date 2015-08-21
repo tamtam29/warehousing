@@ -128,7 +128,7 @@ body ul.nav.nav-second-level.collapse.in li:after {
 /*--- breadcrumb ---*/
 .content-header{
   position: relative;
-  padding: 2px 0 0 0;
+  /*padding: 2px 0 0 0;*/
 }
 .content-header .breadcrumb {
   float: right;
@@ -136,10 +136,10 @@ body ul.nav.nav-second-level.collapse.in li:after {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 12px;
-  padding: 13px 5px;
+  /*padding: 13px 5px;*/
   position: absolute;
-  top: 15px;
-  right: 10px;
+  top: -1px;
+  right: -14px;
   border-radius: 2px;
 }
 /*--- end breadcrumb ---*/
@@ -219,13 +219,25 @@ div.ui-datepicker {
 .form-control.input-sm.field_barang_keluar {
   border-radius: 0 !important;
 }
-.grandtotal {
-  margin-top: 17px;
-  font-size: 20px;
+.grandtotal_show {
+  font-size: 17px;
+}
+.bayar_show {
+  font-size: 17px;
   clear: both;
+}
+.grandtotal {
+  font-size: 20px;
+  margin-top: 16px;
 }
 .bayar {
   font-size: 20px;
   clear: both;
+}
+.pull_right{
+  float: right;
+}
+.cetak{
+  margin-top: 10px;
 }
 /*--- end table barang keluar ---*/
