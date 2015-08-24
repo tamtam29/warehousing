@@ -19,7 +19,7 @@ class BarangKeluarsController < ApplicationController
     @barang_keluar.detail_barang_keluars.build
 
     query = params[:name] ? params[:name].downcase : ""
-    @stocks = Stock.joins(:barang).where("(lower(barangs.code) like '%#{query}%' or lower(barangs.name) like '%#{query}%')")
+    @stocks = Stock.joins(:barang).where("(lower(barangs.code) like '%#{query}%' or lower(barangs.name) like '%#{query}%')").page(params[:page]).per(5)
   end
 
   # GET /barang_keluars/1/edit

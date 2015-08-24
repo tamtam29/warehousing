@@ -31,16 +31,16 @@
           </div>
           <div class="col-md-6">
             <div class="form-group bayar">
-              <%= f.label :bayar, "Tunai", class: "col-sm-4 control-label"  %>
-              <div class="col-sm-8">
-                <%= label_tag :label_bayar, 'Rp. 0', class: "col-sm-12 control-label", :id=>"label_bayar" %>
+              <%= f.label :bayar, "Tunai (Rp.)", class: "col-sm-6 control-label"  %>
+              <div class="col-sm-6">
+                <%= label_tag :label_bayar, '0', class: "col-sm-12 control-label", :id=>"label_bayar" %>
               </div>
             </div>
           </div>
         </div>
         <br>
 
-          <table class="table table-striped table-hover table-bordered">
+          <table class="table table-striped table-hover table-bordered barang_keluar">
           <thead>
             <tr>
               <th width="10%">Kode</th>
@@ -75,9 +75,9 @@
             </div>
             <div class="col-md-6">
               <div class="form-group grandtotal">
-                <%= f.label :grand_total, "Grand Total", class: "col-sm-4 control-label"  %>
-                <div class="col-sm-8">
-                  <%= label_tag :label_grand_total, 'Rp. 0', class: "col-sm-12 control-label", :id=>"label_grand_total" %>
+                <%= f.label :grand_total, "Grand Total (Rp.)", class: "col-sm-6 control-label"  %>
+                <div class="col-sm-6">
+                  <%= label_tag :label_grand_total, '0', class: "col-sm-12 control-label", :id=>"label_grand_total" %>
                   <%= hidden_field_tag :grand_total, '', :name=>"barang_keluar[grand_total]", :id=>"barang_keluar_grand_total" %>
                 </div>
               </div>
@@ -90,8 +90,10 @@
           <div class="form-group" style="border-top: solid 1px #ddd;">
             <br>
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <%= link_to "Cancel", new_barang_keluar_path, class: "btn btn-primary btn-sm" %>
-              <%= submit_tag params[:action] == 'new' ? "Create" : "Update", class: "btn btn-success btn-sm" %>
+              <div id="button_submit_bk">
+                <%#= link_to "Cancel", new_barang_keluar_path, class: "btn btn-primary btn-sm" %>
+                <%#= submit_tag "Create", class: "btn btn-success btn-sm" %>
+              </div>
             </div>
           </div>
           <br>
@@ -105,7 +107,7 @@
 <% end %>
 
 <script>
-  $(function() {
+  $(document).ready(function(){
     $( "#barang_keluar_tgl_keluar" ).datepicker();
   });
 
@@ -175,6 +177,7 @@
       $("[id^='total_harga_"+index+"']").text(accounting.formatMoney(total_harga, "", 2));
       $("[id^='field_total_harga_"+index+"']").val(total_harga);
       hitung_grand_total()
+      hitung_kembalian()
     } else {
       $("[id^='jumlah_"+index+"']").val(max_jumlah);
       hitung_total(index, max_jumlah)
@@ -188,7 +191,7 @@
       grand_total = tot_harga + grand_total;
     }
     $("#barang_keluar_grand_total").val(grand_total);
-    $("#label_grand_total").text("Rp. "+accounting.formatMoney(grand_total, "", 2));
+    $("#label_grand_total").text(accounting.formatMoney(grand_total, "", 2));
   }
   function hitung_kembalian(){
     var grand_total = parseFloat(accounting.unformat($("#barang_keluar_grand_total").val(), "."));
@@ -196,6 +199,19 @@
     var kembalian = bayar - grand_total;
     $("#barang_keluar_kembalian").val(kembalian);
     $("#field_kembalian").val(accounting.formatMoney(kembalian, "", 2));
-    $("#label_bayar").text("Rp. "+accounting.formatMoney(bayar, "", 2));
+    $("#label_bayar").text(accounting.formatMoney(bayar, "", 2));
+    // appendButton()
+    var tableSize = $('.barang_keluar tbody tr').length;
+    if (tableSize > 0 && kembalian > 0 && grand_total != 0){
+      if ($('#button_submit_bk input').length == 0) {
+        var button = ""
+        button += "<a class='btn btn-primary btn-sm cancel_bk' href='/barang_keluars/new'>Cancel</a>"
+        button += "<input type='submit' name='commit' value='Create' class='btn btn-success btn-sm submit_bk'>"
+        $('#button_submit_bk').append(button);
+      }
+    } else {
+      $(".cancel_bk").remove();
+      $(".submit_bk").remove();
+    }
   }
 </script>

@@ -216,7 +216,8 @@ div.ui-datepicker {
   padding: 2px !important;
   cursor:pointer;
 }
-.form-control.input-sm.field_barang_keluar {
+.field_barang_keluar,
+.btn {
   border-radius: 0 !important;
 }
 .grandtotal_show {
