@@ -1,13 +1,10 @@
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
-      <th rowspan="2" style="vertical-align: middle;">Tgl. Keluar</th>
-      <th rowspan="2" style="vertical-align: middle;">No. Transaksi</th>
-      <th colspan="5">Rp.</th>
-    </tr>
-    <tr>
+      <th>Tgl. Keluar</th>
+      <th>No. Transaksi</th>
       <th>Total Harga</th>
-      <th>Potongan</th>
+      <th>Discount</th>
       <th>Grand Total</th>
       <th>Bayar</th>
       <th>Kembalian</th>
@@ -18,11 +15,11 @@
       <tr>
         <td align="center"><%= link_to barang_keluar.tgl_keluar, report_path(barang_keluar) %></td>
         <td align="center"><%= link_to barang_keluar.no_transaksi, report_path(barang_keluar) %></td>
-        <td align="right"><%= link_to "-", report_path(barang_keluar) %></td>
-        <td align="right"><%= link_to "-", report_path(barang_keluar) %></td>
-        <td align="right"><%= link_to add_delimiter(barang_keluar.grand_total), report_path(barang_keluar) %></td>
-        <td align="right"><%= link_to add_delimiter(barang_keluar.bayar), report_path(barang_keluar) %></td>
-        <td align="right"><%= link_to add_delimiter(barang_keluar.kembalian), report_path(barang_keluar) %></td>
+        <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal")), report_path(barang_keluar) %></td>
+        <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal") - barang_keluar.grand_total), report_path(barang_keluar) %></td>
+        <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.grand_total), report_path(barang_keluar) %></td>
+        <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.bayar), report_path(barang_keluar) %></td>
+        <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.kembalian), report_path(barang_keluar) %></td>
       </tr>
     <% end %>
   </tbody>

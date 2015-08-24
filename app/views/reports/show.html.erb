@@ -41,9 +41,10 @@
                   <th>Nama Barang</th>
                   <th width="10%">Jumlah</th>
                   <th width="5%">Satuan</th>
-                  <th width="15%">Harga (Rp.)</th>
-                  <th width="15%">Disc. (%)</th>
-                  <th width="15%">Total (Rp.)</th>
+                  <th width="15%">Harga</th>
+                  <th width="15%">Tot. Harga</th>
+                  <th width="15%">Discount</th>
+                  <th width="15%">Total</th>
                 </tr>
                 <tbody>
                   <% @barang_keluar.detail_barang_keluars.each do |detail_barang_keluar| %>
@@ -52,13 +53,10 @@
                       <td><%= detail_barang_keluar.barang_keluar_barang.name %></td>
                       <td align="right"><%= detail_barang_keluar.jumlah %></td>
                       <td align="center"><%= detail_barang_keluar.barang_keluar_barang.unit.name %></td>
-                      <td align="right"><%= add_delimiter(detail_barang_keluar.barang_keluar_barang.harga) %></td>
-                      <% if detail_barang_keluar.barang_keluar_barang.barang_keluar_promo %>
-                        <td align="right"><%= detail_barang_keluar.barang_keluar_barang.barang_keluar_promo.disc.to_s+" / "+ detail_barang_keluar.barang_keluar_barang.barang_keluar_promo.threshold_qty.to_s+" Barang" %></td>
-                      <% else %>
-                        <td align="right">-</td>
-                      <% end %>
-                      <td align="right"><%= add_delimiter(detail_barang_keluar.total_harga) %></td>
+                      <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.barang_keluar_barang.harga) %></td>
+                      <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga_awal) %></td>
+                      <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga_awal - detail_barang_keluar.total_harga) %></td>
+                      <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga) %></td>
                     </tr>
                   <% end %>
                 </tbody>

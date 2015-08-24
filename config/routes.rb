@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'dashboards#index'
+  root to: 'stocks#index'
   devise_for :users
   resources :users
   resources :dashboards

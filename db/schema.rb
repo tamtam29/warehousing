@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150820053024) do
     t.integer  "barang_keluar_id",        limit: 4
     t.integer  "barang_keluar_barang_id", limit: 4
     t.integer  "jumlah",                  limit: 4,  default: 0
+    t.float    "total_harga_awal",        limit: 24, default: 0.0
     t.float    "total_harga",             limit: 24, default: 0.0
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false

@@ -250,3 +250,10 @@ div.ui-datepicker {
   border-left: 1px solid #54677a;
 }
 
+.main-footer {
+    background: #fdfdfd;
+    padding: 15px;
+    border-top: 1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
+    margin-left: 250px;
+}
