@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resources :barang_masuks
   resources :barang_keluars
   resources :detail_barang_keluars
-
+  resources :reports
 end

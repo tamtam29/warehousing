@@ -1,8 +1,9 @@
 <section class="content-header">
-  <h1><i class="fa fa-user fa-fw"></i> Kasir</h1>
+  <h1><i class="fa fa-file-archive-o fa-fw"></i> Report</h1>
   <ol class="breadcrumb">
-    <li class="nonactive"><i class="fa fa-user fa-fw"></i> Kasir</li>
-    <li class="avtive">Detail Barang Keluar</li>
+    <li class="nonactive"><i class="fa fa-file-archive-o fa-fw"></i> Report</li>
+    <li><%= link_to reports_path do %>Report Barang Keluar<% end %></li>
+    <li class="avtive">Detail Report Barang Keluar</li>
   </ol>
 </section>
 
@@ -10,7 +11,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Detail Barang Keluar</h2>
+        <h2>Detail Report Barang Keluar</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -96,7 +97,7 @@
 
           </div>
         </div>
-        <%= link_to new_barang_keluar_path do %><i class="fa fa-reply-all"></i> Kembali ke menu kasir<% end %>
+        <%= link_to reports_path do %><i class="fa fa-reply-all"></i> Ke report barang keluar<% end %>
       </div>
     </div>
   </div>
