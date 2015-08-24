@@ -180,7 +180,6 @@
       $("[id^='field_total_harga_awal_"+index+"']").val(harga * jumlah);
       $("[id^='total_harga_"+index+"']").text(accounting.formatMoney(total_harga, "", 2));
       $("[id^='field_total_harga_"+index+"']").val(total_harga);
-      $("[id^='potongan_"+index+"']").text(accounting.formatMoney(total_harga, "", 2));
       hitung_grand_total()
       hitung_kembalian()
     } else {

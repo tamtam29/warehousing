@@ -59,6 +59,7 @@ class BarangKeluarsController < ApplicationController
     @barang_keluar.no_transaksi = BarangKeluar.generate_no_transaksi
     respond_to do |format|
       if @barang_keluar.save
+        decrease_stock(params[:barang_keluar][:detail_barang_keluars_attributes])
         format.html { redirect_to @barang_keluar, notice: 'Barang keluar was successfully created.' }
         format.json { render :show, status: :created, location: @barang_keluar }
       else
@@ -101,5 +102,13 @@ class BarangKeluarsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_keluar_params
       params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :bayar, :kembalian, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
+    end
+
+    def decrease_stock(detail_barang_keluars)
+      detail_barang_keluars.each do |detail_barang_keluar|
+        stok_barang = Stock.find(detail_barang_keluar[1][:barang_id])
+        stok_barang.jumlah = stok_barang.jumlah.to_i - detail_barang_keluar[1][:jumlah].to_i
+        stok_barang.save
+      end
     end
 end
