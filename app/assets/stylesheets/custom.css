@@ -242,3 +242,11 @@ div.ui-datepicker {
   margin-top: 10px;
 }
 /*--- end table barang keluar ---*/
+
+.brand-btn {
+  margin-top: 0px;
+  cursor: pointer;
+  border-right: 1px solid white;
+  border-left: 1px solid #54677a;
+}
+

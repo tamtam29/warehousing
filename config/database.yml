@@ -1,9 +1,9 @@
 default: &default
-  adapter: postgresql
+  adapter: mysql2
   host: localhost
-  encoding: unicode
-  username: sowo_user
-  password: 123456
+  encoding: utf8
+  username: root
+  password: rum4h4s1bjn
   pool: 5
 
 development:
@@ -14,9 +14,11 @@ test:
   <<: *default
   database: warehousing_test
 
-# production:
-#   <<: *default
-#   host: localhost
-#   database: warehouse_development
-#   username: sowo_user
-#   password: 123456
+production:
+  adapter: mysql2
+  host: localhost
+  encoding: utf8
+  username: rumahsib_bjn
+  password: rum4h4s1bjn_p0rt4l
+  pool: 5
+  database: warehouse_development

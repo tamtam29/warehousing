@@ -13,141 +13,138 @@
 
 ActiveRecord::Schema.define(version: 20150820053024) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "barang_keluar_barangs", force: :cascade do |t|
-    t.integer  "barang_keluar_category_id"
-    t.integer  "unit_id"
-    t.string   "code"
-    t.string   "name"
-    t.text     "description"
-    t.float    "harga",                     default: 0.0
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "barang_keluar_category_id", limit: 4
+    t.integer  "unit_id",                   limit: 4
+    t.string   "code",                      limit: 255
+    t.string   "name",                      limit: 255
+    t.text     "description",               limit: 65535
+    t.float    "harga",                     limit: 24,    default: 0.0
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
   end
 
   add_index "barang_keluar_barangs", ["barang_keluar_category_id"], name: "index_barang_keluar_barangs_on_barang_keluar_category_id", using: :btree
   add_index "barang_keluar_barangs", ["unit_id"], name: "index_barang_keluar_barangs_on_unit_id", using: :btree
 
   create_table "barang_keluar_categories", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "barang_keluar_promos", force: :cascade do |t|
-    t.integer  "barang_keluar_barang_id"
-    t.string   "name"
-    t.string   "description"
-    t.integer  "threshold_qty"
-    t.float    "disc",                    default: 0.0
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.integer  "barang_keluar_barang_id", limit: 4
+    t.string   "name",                    limit: 255
+    t.string   "description",             limit: 255
+    t.integer  "threshold_qty",           limit: 4
+    t.float    "disc",                    limit: 24,  default: 0.0
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
   add_index "barang_keluar_promos", ["barang_keluar_barang_id"], name: "index_barang_keluar_promos_on_barang_keluar_barang_id", using: :btree
 
   create_table "barang_keluars", force: :cascade do |t|
-    t.string   "no_transaksi"
+    t.string   "no_transaksi", limit: 255
     t.date     "tgl_keluar"
-    t.float    "grand_total",  default: 0.0
-    t.float    "bayar",        default: 0.0
-    t.float    "kembalian",    default: 0.0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.float    "grand_total",  limit: 24,  default: 0.0
+    t.float    "bayar",        limit: 24,  default: 0.0
+    t.float    "kembalian",    limit: 24,  default: 0.0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "barang_masuks", force: :cascade do |t|
-    t.integer  "barang_id"
-    t.string   "no_transaksi"
-    t.integer  "jumlah",       default: 0
+    t.integer  "barang_id",    limit: 4
+    t.string   "no_transaksi", limit: 255
+    t.integer  "jumlah",       limit: 4,     default: 0
     t.date     "tgl_masuk"
-    t.text     "note"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "note",         limit: 65535
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   add_index "barang_masuks", ["barang_id"], name: "index_barang_masuks_on_barang_id", using: :btree
 
   create_table "barangs", force: :cascade do |t|
-    t.integer  "category_id"
-    t.integer  "unit_id"
-    t.string   "code"
-    t.string   "name"
-    t.text     "description"
-    t.float    "harga",       default: 0.0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "category_id", limit: 4
+    t.integer  "unit_id",     limit: 4
+    t.string   "code",        limit: 255
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.float    "harga",       limit: 24,    default: 0.0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   add_index "barangs", ["category_id"], name: "index_barangs_on_category_id", using: :btree
   add_index "barangs", ["unit_id"], name: "index_barangs_on_unit_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "detail_barang_keluars", force: :cascade do |t|
-    t.integer  "barang_keluar_id"
-    t.integer  "barang_keluar_barang_id"
-    t.integer  "jumlah",                  default: 0
-    t.float    "total_harga",             default: 0.0
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.integer  "barang_keluar_id",        limit: 4
+    t.integer  "barang_keluar_barang_id", limit: 4
+    t.integer  "jumlah",                  limit: 4,  default: 0
+    t.float    "total_harga",             limit: 24, default: 0.0
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "detail_barang_keluars", ["barang_keluar_barang_id"], name: "index_detail_barang_keluars_on_barang_keluar_barang_id", using: :btree
   add_index "detail_barang_keluars", ["barang_keluar_id"], name: "index_detail_barang_keluars_on_barang_keluar_id", using: :btree
 
   create_table "promos", force: :cascade do |t|
-    t.integer  "barang_id"
-    t.string   "name"
-    t.string   "description"
-    t.integer  "threshold_qty"
-    t.float    "disc"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "barang_id",     limit: 4
+    t.string   "name",          limit: 255
+    t.string   "description",   limit: 255
+    t.integer  "threshold_qty", limit: 4
+    t.float    "disc",          limit: 24
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "promos", ["barang_id"], name: "index_promos_on_barang_id", using: :btree
 
   create_table "stocks", force: :cascade do |t|
-    t.integer  "barang_id"
-    t.integer  "jumlah",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "barang_id",  limit: 4
+    t.integer  "jumlah",     limit: 4, default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "stocks", ["barang_id"], name: "index_stocks_on_barang_id", using: :btree
 
   create_table "units", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name",             default: "",          null: false
-    t.string   "last_name",              default: "",          null: false
-    t.string   "email",                  default: "",          null: false
-    t.string   "username",               default: "",          null: false
-    t.string   "encrypted_password",     default: "",          null: false
-    t.string   "role",                   default: "Anonymous", null: false
-    t.string   "reset_password_token"
+    t.string   "first_name",             limit: 255, default: "",          null: false
+    t.string   "last_name",              limit: 255, default: "",          null: false
+    t.string   "email",                  limit: 255, default: "",          null: false
+    t.string   "username",               limit: 255, default: "",          null: false
+    t.string   "encrypted_password",     limit: 255, default: "",          null: false
+    t.string   "role",                   limit: 255, default: "Anonymous", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,           null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,           null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
