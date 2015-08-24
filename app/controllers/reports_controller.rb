@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "AND barang_keluars.created_at::timestamp::date BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "AND CAST(barang_keluars.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
 
     @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%' #{query_date}").order("barang_keluars.no_transaksi DESC").page(params[:page])

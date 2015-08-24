@@ -21,33 +21,10 @@
             </div>
           </div>
         </div>
-        <table class="table table-striped table-hover table-bordered">
-          <thead>
-            <tr>
-              <th>Kategori Barang</th>
-              <th>Kode Barang</th>
-              <th>Nama Barang</th>
-              <th>Satuan</th>
-              <th>Harga (Rp.)</th>
-              <th colspan="2" width="2%">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @barangs.each do |barang| %>
-              <tr>
-                <td><%= link_to barang.category.name, barang %></td>
-                <td align="center"><%= link_to barang.code, barang %></td>
-                <td><%= link_to barang.name, barang %></td>
-                <td><%= link_to barang.unit.name, barang %></td>
-                <td align="right"><%= link_to add_delimiter(barang.harga), barang %></td>
-                <td><%= link_to edit_barang_path(barang), class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<% end %></td>
-                <td><%= link_to barang, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do %><i class="fa fa-trash-o"></i> Delete<% end %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div id="table_index">
+          <%= render 'table_index' %>
+        </div>
       </div>
-      <div align="right"><%= paginate @barangs %></div>
     </div>
   </div>
 </div>

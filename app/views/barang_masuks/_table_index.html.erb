@@ -1,0 +1,24 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>No. Transaksi</th>
+      <th>Nama Barang</th>
+      <th>Jumlah</th>
+      <th>Tgl. Masuk</th>
+      <th colspan="2" width="2%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @barang_masuks.each do |barang_masuk| %>
+      <tr>
+        <td align="center"><%= link_to barang_masuk.no_transaksi, barang_masuk %></td>
+        <td><%= link_to barang_masuk.barang.name, barang_masuk %></td>
+        <td align="right"><%= link_to barang_masuk.jumlah, barang_masuk %></td>
+        <td align="center"><%= link_to barang_masuk.tgl_masuk.strftime("%d-%m-%Y"), barang_masuk %></td>
+        <td><%= link_to edit_barang_masuk_path(barang_masuk), class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<% end %></td>
+        <td><%= link_to barang_masuk, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do %><i class="fa fa-trash-o"></i> Delete<% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div align="right"><%= paginate @barang_masuks, remote: true %></div>
