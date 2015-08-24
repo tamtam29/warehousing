@@ -21,4 +21,4 @@ production:
   username: rumahsib_bjn
   password: rum4h4s1bjn_p0rt4l
   pool: 5
-  database: warehouse_development
+  database: rumahsib_portal_rumahasi
