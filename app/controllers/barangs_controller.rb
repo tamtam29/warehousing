@@ -8,7 +8,16 @@ class BarangsController < ApplicationController
     query = params[:query] ? params[:query].downcase : ""
     respond_to do |format|
       format.html {
-        @barangs = Barang.page(params[:page])
+        @barangs = Barang.order("barangs.code ASC").page(params[:page])
+      }
+      format.js {
+        query = params[:name] ? params[:name].downcase : ""
+        @barangs = Barang.joins(:category)
+                         .where("(lower(categories.name) like '%#{query}%' OR
+                                  lower(barangs.name) like '%#{query}%' OR
+                                  lower(barangs.code) like '%#{query}%')")
+                         .order("barangs.code ASC")
+                         .page(params[:page])
       }
       format.json {
         @barangs = Barang.where("(lower(code) like '%#{query}%' or lower(name) like '%#{query}%')")

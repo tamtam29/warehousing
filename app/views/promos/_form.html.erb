@@ -14,22 +14,22 @@
   <div class="x_content">
     <br />
     <div class="form-group">
-      <%= f.label "Barang", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <%= hidden_field_tag "promo[barang_id]", @promo.barang_id %>
-        <%= text_field_tag "promo[barang_name]", @promo.barang ? @promo.barang.name : nil, id: "promo_barang_name", class: "form-control input-sm col-md-7 col-xs-12", placeholder: "Pilih Barang", autocomplete: "off", :data => {:required => 'true', type: 'alphabet'} %>
-      </div>
-    </div>
-    <div class="form-group">
       <%= f.label :name, "Promo", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <%= f.text_field :name, class: "form-control input-sm col-md-7 col-xs-12" %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.label :description, "Deskripsi", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+      <%= f.label :description, "Deskripsi Promo", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <%= f.text_area :description, rows: 5, class: "form-control input-sm col-md-7 col-xs-12" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label "Barang", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <%= hidden_field_tag "promo[barang_id]", @promo.barang_id %>
+        <%= text_field_tag "promo[barang_name]", @promo.barang ? @promo.barang.name : nil, id: "promo_barang_name", class: "form-control input-sm col-md-7 col-xs-12", placeholder: "Pilih Barang", autocomplete: "off", :data => {:required => 'true', type: 'alphabet'} %>
       </div>
     </div>
     <div class="form-group">

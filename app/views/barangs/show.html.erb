@@ -16,7 +16,6 @@
       </div>
 
       <div class="x_content">
-        <br />
         <div class="form-group">
           <div class="row row_content">
             <div class="title_row">Kategori Barang</div><div class="data_row"><%= @barang.category.name %></div>
@@ -34,7 +33,7 @@
             <div class="title_row">Deskripsi Barang</div><div class="data_row"><%= @barang.description %></div>
           </div>
           <div class="row row_content">
-            <div class="title_row">Harga Satuan (Rp.)</div><div class="data_row"><%= add_delimiter(@barang.harga) %></div>
+            <div class="title_row">Harga Satuan</div><div class="data_row"><%= "Rp. "+add_delimiter(@barang.harga) %></div>
           </div>
         </div>
         <%= link_to barangs_path do %><i class="fa fa-reply-all"></i> Ke daftar barang<% end %>

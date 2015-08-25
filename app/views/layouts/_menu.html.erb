@@ -65,6 +65,9 @@
             <% if can? :manage, BarangKeluar %>
               <li><%= link_to reports_path do %>Barang Keluar<% end %></li>
             <% end %>
+            <% if can? :manage, BarangMasuk %>
+              <li><%= link_to report_barang_masuk_path do %>Barang Masuk<% end %></li>
+            <% end %>
           </ul>
           <!-- /.nav-second-level -->
         </li>

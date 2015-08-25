@@ -16,7 +16,6 @@ class BarangKeluarsController < ApplicationController
   # GET /barang_keluars/new
   def new
     @barang_keluar = BarangKeluar.new
-    @barang_keluar.tgl_keluar = DateTime.now.strftime("%Y-%m-%d")
     @barang_keluar.detail_barang_keluars.build
 
     query = params[:name] ? params[:name].downcase : ""

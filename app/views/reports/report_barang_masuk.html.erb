@@ -2,7 +2,7 @@
   <h1><i class="fa fa-file-archive-o fa-fw"></i> Report</h1>
   <ol class="breadcrumb">
     <li class="nonactive"><i class="fa fa-file-archive-o fa-fw"></i> Report</li>
-    <li><%= link_to reports_path do %>Report Barang Keluar<% end %></li>
+    <li><%= link_to reports_path do %>Report Barang Masuk<% end %></li>
   </ol>
 </section>
 
@@ -10,11 +10,11 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Report Barang Keluar</h2>
+        <h2>Report Barang Masuk</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <%= form_tag reports_path, method: "GET", remote: true do %>
+        <%= form_tag report_barang_masuk_path, method: "GET", remote: true do %>
           <div class="form-group row">
             <div class="col-md-2">
               <%= label_tag :start_date, "Start Date", class: "control-label" %>
@@ -25,8 +25,8 @@
               <%= text_field_tag :end_date, params[:end_date], class: "form-control input-sm" %>
             </div>
             <div class="col-md-4">
-              <%= label_tag :keyword, "No. Transaksi", class: "control-label" %>
-              <%= text_field_tag :no_transaksi, params[:no_transaksi], id:"search_name", class: "form-control input-sm", placeholder: "Cari berdasarkan no. transaksi" %>
+              <%= label_tag :keyword, "Keywoard", class: "control-label" %>
+              <%= text_field_tag :name, params[:name], id:"search_name", class: "form-control input-sm", placeholder: "Cari berdasarkan keyword" %>
             </div>
             <div class="col-md-2">
               <div class="input-group input-group-sm">
@@ -35,8 +35,8 @@
             </div>
           </div>
         <% end %>
-        <div id="table_index">
-          <%= render 'table_index' %>
+        <div id="table_index_barang_masuk">
+          <%= render 'table_index_barang_masuk' %>
         </div>
       </div>
     </div>

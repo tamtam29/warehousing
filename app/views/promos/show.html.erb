@@ -16,19 +16,21 @@
       </div>
 
       <div class="x_content">
-        <br />
         <div class="form-group">
-          <div class="row row_content">
-            <div class="title_row">Nama Barang</div><div class="data_row"><%= @promo.barang.name %></div>
-          </div>
           <div class="row row_content">
             <div class="title_row">Promo</div><div class="data_row"><%= @promo.name %></div>
           </div>
           <div class="row row_content">
-            <div class="title_row">Deskripsi</div><div class="data_row"><%= @promo.description %></div>
+            <div class="title_row">Deskripsi Promo</div><div class="data_row"><%= @promo.description %></div>
           </div>
           <div class="row row_content">
-            <div class="title_row">Discount (%)</div><div class="data_row"><%= @promo.disc %></div>
+            <div class="title_row">Kode</div><div class="data_row"><%= @promo.barang.code %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Nama Barang</div><div class="data_row"><%= @promo.barang.name %></div>
+          </div>
+          <div class="row row_content">
+            <div class="title_row">Discount</div><div class="data_row"><%= add_percentage(@promo.disc) %></div>
           </div>
           <div class="row row_content">
             <div class="title_row">Per Barang</div><div class="data_row"><%= @promo.threshold_qty %></div>

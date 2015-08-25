@@ -6,7 +6,12 @@ class BarangMasuksController < ApplicationController
   # GET /barang_masuks.json
   def index
     query = params[:name] ? params[:name].downcase : ""
-    @barang_masuks = BarangMasuk.joins(:barang).where("(lower(barang_masuks.no_transaksi) like '%#{query}%' or lower(barangs.name) like '%#{query}%')").order("no_transaksi DESC").page(params[:page])
+    @barang_masuks = BarangMasuk.joins(:barang)
+                                .where("(lower(barang_masuks.no_transaksi) like '%#{query}%' OR
+                                         lower(barangs.name) like '%#{query}%' OR
+                                         lower(barangs.code) like '%#{query}%')")
+                                .order("no_transaksi DESC")
+                                .page(params[:page])
   end
 
   # GET /barang_masuks/1

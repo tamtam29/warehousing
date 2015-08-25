@@ -5,7 +5,13 @@ class PromosController < ApplicationController
   # GET /promos
   # GET /promos.json
   def index
-    @promos = Promo.page(params[:page])
+    query = params[:name] ? params[:name].downcase : ""
+    @promos = Promo.joins(:barang)
+                   .where("(lower(promos.name) like '%#{query}%' OR
+                            lower(barangs.name) like '%#{query}%' OR
+                            lower(barangs.code) like '%#{query}%')")
+                   .order("promos.created_at DESC")
+                   .page(params[:page])
   end
 
   # GET /promos/1
