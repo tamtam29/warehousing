@@ -23,7 +23,7 @@
               <%= form_tag barang_masuks_path, method: "GET", remote: true do %>
                 <div class="input-group input-group-sm">
                   <span class="input-group-addon radius"><span class="glyphicon glyphicon-search"></span></span>
-                  <%= text_field_tag :name, params[:name], class: "form-control", placeholder: "Cari berdasarkan kode atau nama barang" %>
+                  <%= text_field_tag :name, params[:name], class: "form-control", placeholder: "Cari berdasarkan no. transaksi atau nama barang" %>
                   <span class="input-group-btn">
                     <%= submit_tag "Cari", class: "btn btn-default radius" %>
                   </span>

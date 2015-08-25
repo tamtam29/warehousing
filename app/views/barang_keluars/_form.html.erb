@@ -22,12 +22,7 @@
       <div class="x_content">
         <div class="row">
           <div class="col-md-6">
-            <div class="form-group">
-              <%= f.label :tgl_keluar, "Tanggal Keluar", class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
-                <%= f.text_field :tgl_keluar, class: "form-control input-sm field_barang_keluar" %>
-              </div>
-            </div>
+            <div class="col-sm-12 control-label timer" style="margin-top: 10px;font-weight:bold;"></div>
           </div>
           <div class="col-md-6">
             <div class="form-group bayar">
@@ -109,7 +104,31 @@
 
 <script>
   $(document).ready(function(){
-    $( "#barang_keluar_tgl_keluar" ).datepicker();
+    var start = new Date;
+    setInterval(function() {
+      date = new Date;
+      year = date.getFullYear();
+      month = date.getMonth();
+      months = new Array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+      d = date.getDate();
+      day = date.getDay();
+      h = date.getHours();
+      if(h<10){
+        h = "0"+h;
+      }
+      m = date.getMinutes();
+      if(m<10){
+        m = "0"+m;
+      }
+      s = date.getSeconds();
+      if(s<10){
+        s = "0"+s;
+      }
+      result = d+' '+months[month]+' '+year+' '+h+':'+m+':'+s;
+      $(".timer").text(result);
+      setTimeout('date_time("'+id+'");','1000');
+      return true;
+    }, 1000);
   });
 
   var index = 0;

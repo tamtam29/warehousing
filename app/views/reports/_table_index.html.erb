@@ -13,7 +13,7 @@
   <tbody>
     <% @barang_keluars.each do |barang_keluar| %>
       <tr>
-        <td align="center"><%= link_to barang_keluar.tgl_keluar, report_path(barang_keluar) %></td>
+        <td align="center"><%= link_to barang_keluar.created_at.strftime("%d-%m-%Y %H:%M"), report_path(barang_keluar) %></td>
         <td align="center"><%= link_to barang_keluar.no_transaksi, report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal")), report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal") - barang_keluar.grand_total), report_path(barang_keluar) %></td>

@@ -102,7 +102,7 @@ class BarangKeluarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_keluar_params
-      params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :bayar, :kembalian, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
+      params.require(:barang_keluar).permit(:id, :no_transaksi, :grand_total, :bayar, :kembalian, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
     end
 
     def decrease_stock(detail_barang_keluars)

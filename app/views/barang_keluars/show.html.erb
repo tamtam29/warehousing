@@ -22,7 +22,7 @@
                 <div class="form-group">
                   <%= label_tag :tgl_keluar, "Tanggal Keluar", class: "col-sm-4 control-label" %>
                   <div class="col-sm-8">
-                    <%= label_tag :label_tgl_keluar, @barang_keluar.tgl_keluar, class: "col-sm-8 control-label" %>
+                    <%= label_tag :label_tgl_keluar, @barang_keluar.created_at.strftime("%d-%m-%Y %H:%M"), class: "col-sm-8 control-label" %>
                   </div>
                 </div>
               </div>
