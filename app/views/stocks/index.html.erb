@@ -14,6 +14,21 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-5">
+              <%= form_tag stocks_path, method: "GET", remote: true do %>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon radius"><span class="glyphicon glyphicon-search"></span></span>
+                  <%= text_field_tag :name, params[:name], class: "form-control", placeholder: "Cari berdasarkan kode atau nama barang" %>
+                  <span class="input-group-btn">
+                    <%= submit_tag "Cari", class: "btn btn-default radius" %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
         <div id="table_index">
           <%= render 'table_index' %>
         </div>

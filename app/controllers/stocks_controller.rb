@@ -1,6 +1,7 @@
 class StocksController < ApplicationController
   def index
-    @stocks = Stock.page(params[:page])
+    query = params[:name] ? params[:name].downcase : ""
+    @stocks = Stock.joins(:barang).where("(lower(barangs.code) like '%#{query}%' or lower(barangs.name) like '%#{query}%')").page(params[:page])
   end
 
   def show
