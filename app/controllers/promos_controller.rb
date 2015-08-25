@@ -1,4 +1,5 @@
 class PromosController < ApplicationController
+  load_and_authorize_resource
   before_action :set_promo, only: [:show, :edit, :update, :destroy]
 
   # GET /promos

@@ -11,9 +11,12 @@ class ReportsController < ApplicationController
     end
 
     @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%' #{query_date}").order("barang_keluars.no_transaksi DESC").page(params[:page])
+
+    authorize! :manage, BarangKeluar
   end
 
   def show
     @barang_keluar = BarangKeluar.find(params[:id])
+    authorize! :manage, BarangKeluar
   end
 end

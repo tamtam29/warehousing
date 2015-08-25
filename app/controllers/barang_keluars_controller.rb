@@ -1,4 +1,5 @@
 class BarangKeluarsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_barang_keluar, only: [:show, :edit, :update, :destroy]
 
   # GET /barang_keluars
