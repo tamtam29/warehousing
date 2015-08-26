@@ -87,6 +87,6 @@ class BarangsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_params
-      params.require(:barang).permit(:category_id, :unit_id, :code, :name, :description, :harga)
+      params.require(:barang).permit(:category_id, :unit_id, :code, :name, :description, :harga, :gambar_barang)
     end
 end

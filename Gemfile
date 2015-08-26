@@ -46,7 +46,7 @@ end
 gem 'devise'
 gem 'kaminari'
 gem 'cancancan'
-#gem "paperclip", github: 'thoughtbot/paperclip'
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'bigdecimal'
 gem 'execjs'
 gem 'therubyracer'
