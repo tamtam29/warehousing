@@ -21,13 +21,13 @@
             </div>
             <div class="col-md-5">
               <%= form_tag barangs_path, method: "GET", remote: true do %>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-addon radius"><span class="glyphicon glyphicon-search"></span></span>
-                  <%= text_field_tag :name, params[:name], class: "form-control", placeholder: "Cari berdasarkan kategori, kode atau barang " %>
-                  <span class="input-group-btn">
-                    <%= submit_tag "Cari", class: "btn btn-default radius" %>
-                  </span>
-                </div>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon radius"><span class="glyphicon glyphicon-search"></span></span>
+                <%= text_field_tag :name, params[:name], class: "form-control", placeholder: "Cari berdasarkan kategori, kode atau barang " %>
+                <span class="input-group-btn">
+                  <%= submit_tag "Cari", class: "btn btn-default radius" %>
+                </span>
+              </div>
               <% end %>
             </div>
           </div>

@@ -6,7 +6,7 @@ class StocksController < ApplicationController
                    .where("(lower(barangs.code) like '%#{query}%' OR
                             lower(barangs.name) like '%#{query}%')")
                    .order("barangs.code ASC")
-                   .page(params[:page])
+                   .page(params[:page]).per(12)
   end
 
   def show

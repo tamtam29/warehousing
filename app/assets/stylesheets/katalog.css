@@ -1,0 +1,98 @@
+.group {
+    zoom: 1;
+}
+.section {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+}
+.images_1_of_4 img {
+    max-width: 100%;
+}
+.images_1_of_4 {
+    width: 23%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    text-align: center;
+    position: relative;
+}
+.grid_1_of_4 {
+    display: block;
+    float: left;
+    margin: 1% 1.6% 1% 0%;
+    box-shadow: 0px 0px 3px rgb(150, 150, 150);
+    -webkit-box-shadow: 0px 0px 3px rgb(150, 150, 150);
+    -moz-box-shadow: 0px 0px 3px rgb(150, 150, 150);
+    -o-box-shadow: 0px 0px 3px rgb(150, 150, 150);
+}
+.price-details {
+    margin-top: 10px;
+    border-top: 1px solid #CD1F25;
+}
+.disc-details {
+}
+.price-number {
+    float: left;
+    padding-top: 5px;
+}
+.disc-number {
+    float: left;
+}
+.add-cart {
+    float: right;
+    display: inline-block;
+    width: 65px;
+}
+.add-cart h4 a {
+    font-size: 0.7em;
+    display: block;
+    padding: 5px 10px;
+    font-family: 'ambleregular';
+    background: #CD1F25;
+    color: #FFF;
+    text-decoration: none;
+    outline: 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.add-cart h4 a i {
+    padding-right: 5px;
+}
+.clear {
+    clear: both;
+}
+h4 {
+    display: block;
+    margin: 0px;
+}
+.nama_barang {
+    display: block;
+    font-size: 1.1em;
+    margin: 0px;
+    padding-top: 5px;
+    font-weight: bold;
+        height: 40px;
+}
+.kode_barang {
+    display: block;
+    font-size: 1.1em;
+    margin: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+.price-details p span.rupees {
+    font-size: 1em;
+    font-family: 'ambleregular';
+    color: #383838;
+}
+.price-details p {
+    margin: 0;
+}
+.disc-details p span.rupees {
+    font-size: 1em;
+    font-family: 'ambleregular';
+    color: #383838;
+}
