@@ -25,3 +25,9 @@ th{
   text-align: center;
 }
 
+tfoot th{
+  background-color: #E6E9ED;
+  text-align: center;
+  font-size: 16px;
+}
+

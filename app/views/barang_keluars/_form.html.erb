@@ -22,7 +22,17 @@
       <div class="x_content">
         <div class="row">
           <div class="col-md-6">
-            <div class="col-sm-12 control-label timer" style="margin-top: 10px;font-weight:bold;"></div>
+            <% if can? :manage, User %>
+              <div class="form-group">
+                <%= f.label :tgl_keluar, "Tanggal Transaksi", class: "col-sm-4 control-label"  %>
+                <div class="col-sm-8">
+                  <%= f.text_field :tgl_keluar, class: "form-control input-sm field_barang_keluar" %>
+                </div>
+              </div>
+            <% else %>
+              <div class="col-sm-12 control-label timer" style="margin-top: 10px;font-weight:bold;"></div>
+              <%= hidden_field_tag :tgl_keluar, "", name: "barang_keluar[tgl_keluar]", :id => "barang_keluar_tgl_keluar_user"  %>
+            <% end %>
           </div>
           <div class="col-md-6">
             <div class="form-group bayar">
@@ -104,6 +114,7 @@
 
 <script>
   $(document).ready(function(){
+    $("#barang_keluar_tgl_keluar").datetimepicker();
     var start = new Date;
     setInterval(function() {
       date = new Date;
@@ -126,7 +137,8 @@
       }
       result = d+' '+months[month]+' '+year+' '+h+':'+m+':'+s;
       $(".timer").text(result);
-      setTimeout('date_time("'+id+'");','1000');
+      field_result = year+'/'+month+'/'+d+' '+h+':'+m;
+      $("#barang_keluar_tgl_keluar_user").val(field_result)
       return true;
     }, 1000);
   });

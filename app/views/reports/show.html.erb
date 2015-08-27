@@ -23,7 +23,7 @@
                 <div class="form-group">
                   <%= label_tag :tgl_keluar, "Tanggal Keluar", class: "col-sm-4 control-label" %>
                   <div class="col-sm-8">
-                    <%= label_tag :label_tgl_keluar, @barang_keluar.created_at.strftime("%d-%m-%Y %H:%M"), class: "col-sm-8 control-label" %>
+                    <%= label_tag :label_tgl_keluar, @barang_keluar.tgl_keluar.strftime("%d-%m-%Y %H:%M"), class: "col-sm-8 control-label" %>
                   </div>
                 </div>
               </div>
@@ -48,6 +48,7 @@
                 </tr>
                 <tbody>
                   <% @barang_keluar.detail_barang_keluars.each do |detail_barang_keluar| %>
+                    <% @discount = @discount.to_i + (detail_barang_keluar.total_harga_awal - detail_barang_keluar.total_harga)%>
                     <tr>
                       <td align="center"><%= detail_barang_keluar.barang_keluar_barang.code %></td>
                       <td><%= detail_barang_keluar.barang_keluar_barang.name %></td>
@@ -64,26 +65,32 @@
             </table>
 
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <%= label_tag :bayar, "Tunai", class: "col-sm-5 control-label"  %>
-                  <div class="col-sm-7">
-                    <%= label_tag :label_bayar, "Rp. #{add_delimiter(@barang_keluar.bayar)}", class: "control-label pull_right" %>
+              <div class="col-md-5">
+                <div class="form-group report">
+                  <div class="row row_content">
+                    <div class="title_row report">Total Harga</div>
+                    <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.detail_barang_keluars.sum('total_harga_awal'))}" %></div></div>
+                  </div>
+                  <div class="row row_content">
+                    <div class="title_row report">Discount</div>
+                    <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.detail_barang_keluars.sum('total_harga_awal')-@barang_keluar.detail_barang_keluars.sum('total_harga'))}" %></div></div>
+                  </div>
+                  <div class="row row_content">
+                    <div class="title_row report">Bayar Tunai</div>
+                    <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.bayar)}" %></div></div>
+                  </div>
+                  <div class="row row_content">
+                    <div class="title_row report">Kembalian</div>
+                    <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.kembalian)}" %></div></div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <%= label_tag :kembalian, "Kembalian", class: "col-sm-5 control-label"  %>
-                  <div class="col-sm-7">
-                    <%= label_tag :label_kembalian, "Rp. #{add_delimiter(@barang_keluar.kembalian)}", class: "control-label pull_right" %>
+                  <div class="col-sm-6" style="border-top: 1px solid #ddd;padding-top: 5px;">
+                    <%= label_tag :grand_total, "GRAND TOTAL", class: "control-label grandtotal_show"  %>
                   </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-5">
-                      <%= label_tag :grand_total, "GRAND TOTAL", class: "control-label grandtotal_show"  %>
-                    </div>
-                    <div class="col-sm-7">
-                      <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.grand_total)}", class: "control-label pull_right grandtotal_show" %>
-                    </div>
+                  <div class="col-sm-6" style="border-top: 1px solid #ddd;padding-top: 5px;">
+                    <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.grand_total)}", class: "control-label pull_right grandtotal_show" %>
+                  </div>
                 </div>
               </div>
               <div class="col-md-6">

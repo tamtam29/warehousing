@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered barang">
   <thead>
     <tr>
       <th width="15%">Tgl. Masuk</th>
@@ -21,3 +21,14 @@
   </tbody>
 </table>
 <div align="right"><%= paginate @barang_masuks, remote: true %></div>
+
+<script>
+  $(document).ready(function(){
+    var tableBarangSize = $('.barang tbody tr').length;
+    if (tableBarangSize == 0){
+      $('.barang').hide();
+    } else {
+      $('.barang').show();
+    }
+  });
+</script>

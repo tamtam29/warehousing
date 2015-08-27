@@ -13,7 +13,7 @@
     </div>
   </div>
 </div>
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered barang">
 <thead>
   <tr>
     <th width="20%">Kode Barang</th>
@@ -41,3 +41,13 @@
 </table>
 <div align="right"><%= paginate @stocks, remote: true %></div>
 
+<script>
+  $(document).ready(function(){
+    var tableBarangSize = $('.barang tbody tr').length;
+    if (tableBarangSize == 0){
+      $('.barang').hide();
+    } else {
+      $('.barang').show();
+    }
+  });
+</script>

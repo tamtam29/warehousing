@@ -2,7 +2,7 @@
   <% @stocks.each do |stock| %>
     <div class="grid_1_of_4 images_1_of_4">
       <div class="kode_barang"><%= stock.barang.code %></div>
-      <%= image_tag stock.barang.gambar_barang.url(:medium) %>
+      <%= image_tag stock.barang.gambar_barang.url(:original) %>
       <div class="nama_barang"><%= stock.barang.name %></div>
       <div class="price-details">
         <div class="price-number">
@@ -23,7 +23,6 @@
           <% else %>
             <p><span class="rupees">Disc. -</span></p>
           <% end %>
-
         </div>
         <div class="clear"></div>
       </div>

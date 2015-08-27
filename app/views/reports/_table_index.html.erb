@@ -1,27 +1,40 @@
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered barang">
   <thead>
     <tr>
       <th width="15%">Tgl. Keluar</th>
       <th width="15%">No. Transaksi</th>
       <th>Total Harga</th>
       <th>Discount</th>
-      <th>Grand Total</th>
-      <th>Bayar</th>
-      <th>Kembalian</th>
+      <th width="30%">Grand Total</th>
     </tr>
   </thead>
   <tbody>
     <% @barang_keluars.each do |barang_keluar| %>
       <tr>
-        <td align="center"><%= link_to barang_keluar.created_at.strftime("%d-%m-%Y %H:%M"), report_path(barang_keluar) %></td>
+        <td align="center"><%= link_to barang_keluar.tgl_keluar.strftime("%d-%m-%Y %H:%M"), report_path(barang_keluar) %></td>
         <td align="center"><%= link_to barang_keluar.no_transaksi, report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal")), report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal") - barang_keluar.grand_total), report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.grand_total), report_path(barang_keluar) %></td>
-        <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.bayar), report_path(barang_keluar) %></td>
-        <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.kembalian), report_path(barang_keluar) %></td>
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="4" style="text-align:right;">GRAND TOTAL</th>
+      <th colspan="1" style="text-align:right;"><%= "Rp. "+add_delimiter(@barang_keluars.sum("grand_total")).to_s %></th>
+    </tr>
+  </tfoot>
 </table>
 <div align="right"><%= paginate @barang_keluars, remote: true %></div>
+
+<script>
+  $(document).ready(function(){
+    var tableBarangSize = $('.barang tbody tr').length;
+    if (tableBarangSize == 0){
+      $('.barang').hide();
+    } else {
+      $('.barang').show();
+    }
+  });
+</script>

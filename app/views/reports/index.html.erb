@@ -18,11 +18,11 @@
           <div class="form-group row">
             <div class="col-md-2">
               <%= label_tag :start_date, "Start Date", class: "control-label" %>
-              <%= text_field_tag :start_date, params[:start_date], class: "form-control input-sm" %>
+              <%= text_field_tag :start_date, DateTime.now.to_date.strftime("%Y/%m/%d"), class: "form-control input-sm" %>
             </div>
             <div class="col-md-2">
               <%= label_tag :end_date, "End Date", class: "control-label" %>
-              <%= text_field_tag :end_date, params[:end_date], class: "form-control input-sm" %>
+              <%= text_field_tag :end_date, DateTime.now.to_date.strftime("%Y/%m/%d"), class: "form-control input-sm" %>
             </div>
             <div class="col-md-4">
               <%= label_tag :keyword, "No. Transaksi", class: "control-label" %>
@@ -45,7 +45,23 @@
 
 <script>
   $(document).ready(function(){
-    $( "#start_date" ).datepicker({ dateFormat: 'yy/mm/dd' });
-    $( "#end_date" ).datepicker({ dateFormat: 'yy/mm/dd' });
+    $( "#start_date" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: 'yy/mm/dd',
+      onClose: function( selectedDate ) {
+        $( "#end_date" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#end_date" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: 'yy/mm/dd',
+      onClose: function( selectedDate ) {
+        $( "#start_date" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
   });
 </script>

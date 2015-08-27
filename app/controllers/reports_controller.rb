@@ -9,10 +9,13 @@ class ReportsController < ApplicationController
     else
       query_date = "AND CAST(barang_keluars.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
-
-    @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%' #{query_date}")
-                                  .order("barang_keluars.no_transaksi DESC")
-                                  .page(params[:page])
+    if query_date != nil
+      @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%' #{query_date}")
+                                    .order("barang_keluars.no_transaksi DESC")
+                                    .page(params[:page])
+    else
+      @barang_keluars = BarangKeluar.where("id = 0").page(params[:page])
+    end
 
     authorize! :manage, BarangKeluar
   end
@@ -33,13 +36,17 @@ class ReportsController < ApplicationController
       query_date = "AND CAST(barang_masuks.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
 
-    @barang_masuks = BarangMasuk.joins(:barang)
-                                .where("UPPER(barang_masuks.no_transaksi) like '%#{name}%' OR
-                                        UPPER(barangs.name) like '%#{name}%' OR
-                                        UPPER(barangs.code) like '%#{name}%'
-                                        #{query_date}")
-                                .order("barang_masuks.no_transaksi DESC")
-                                .page(params[:page])
+    if query_date != nil
+      @barang_masuks = BarangMasuk.joins(:barang)
+                                  .where("UPPER(barang_masuks.no_transaksi) like '%#{name}%' OR
+                                          UPPER(barangs.name) like '%#{name}%' OR
+                                          UPPER(barangs.code) like '%#{name}%'
+                                          #{query_date}")
+                                  .order("barang_masuks.no_transaksi DESC")
+                                  .page(params[:page])
+    else
+      @barang_masuks = BarangMasuk.where("id = 0").page(params[:page])
+    end
 
     authorize! :manage, BarangMasuk
   end

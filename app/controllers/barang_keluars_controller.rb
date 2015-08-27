@@ -16,14 +16,19 @@ class BarangKeluarsController < ApplicationController
   # GET /barang_keluars/new
   def new
     @barang_keluar = BarangKeluar.new
+    @barang_keluar.tgl_keluar = DateTime.now.strftime("%Y/%m/%d %H:%m")
     @barang_keluar.detail_barang_keluars.build
 
     query = params[:name] ? params[:name].downcase : ""
-    @stocks = Stock.joins(:barang)
-                   .where("(lower(barangs.code) like '%#{query}%' OR
-                            lower(barangs.name) like '%#{query}%')")
-                   .order("barangs.code ASC")
-                   .page(params[:page]).per(5)
+    if query != ""
+      @stocks = Stock.joins(:barang)
+                     .where("(lower(barangs.code) like '%#{query}%' OR
+                              lower(barangs.name) like '%#{query}%')")
+                     .order("barangs.code ASC")
+                     .page(params[:page]).per(5)
+    else
+      @stocks = Stock.where("id = 0").page(params[:page])
+    end
   end
 
   # GET /barang_keluars/1/edit
@@ -40,16 +45,18 @@ class BarangKeluarsController < ApplicationController
       barang_keluar_category = BarangKeluarCategory.find_or_create_by(old_category.serializable_hash(except: [:id]))
       # Barang keluar barang
       old_barang = barang
-      barang_keluar_barang = BarangKeluarBarang.where(old_barang.serializable_hash(except: [:id, :category_id])).where(barang_keluar_category_id: barang_keluar_category.id).first
+      barang_keluar_barang = BarangKeluarBarang.where(old_barang.serializable_hash(except: [:id, :category_id, :gambar_barang_file_name, :gambar_barang_content_type, :gambar_barang_file_size, :gambar_barang_updated_at]))
+                                               .where(barang_keluar_category_id: barang_keluar_category.id).first
       if !barang_keluar_barang
-        barang_keluar_barang = BarangKeluarBarang.new(old_barang.serializable_hash(except: [:id, :category_id]))
+        barang_keluar_barang = BarangKeluarBarang.new(old_barang.serializable_hash(except: [:id, :category_id, :gambar_barang_file_name, :gambar_barang_content_type, :gambar_barang_file_size, :gambar_barang_updated_at]))
         barang_keluar_barang.barang_keluar_category_id = barang_keluar_category.id
         barang_keluar_barang.save
       end
       # Barang keluar promo
       old_promo = barang.promo
       if old_promo
-        barang_keluar_promo = BarangKeluarPromo.where(old_promo.serializable_hash(except: [:id, :barang_id])).where(barang_keluar_barang_id: barang_keluar_barang.id).first
+        barang_keluar_promo = BarangKeluarPromo.where(old_promo.serializable_hash(except: [:id, :barang_id]))
+                                               .where(barang_keluar_barang_id: barang_keluar_barang.id).first
         if !barang_keluar_promo
           barang_keluar_promo = BarangKeluarPromo.new(old_promo.serializable_hash(except: [:id, :barang_id]))
           barang_keluar_promo.barang_keluar_barang_id = barang_keluar_barang.id
@@ -105,7 +112,7 @@ class BarangKeluarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_keluar_params
-      params.require(:barang_keluar).permit(:id, :no_transaksi, :grand_total, :bayar, :kembalian, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
+      params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :bayar, :kembalian, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
     end
 
     def decrease_stock(detail_barang_keluars)
