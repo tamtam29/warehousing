@@ -6,7 +6,8 @@ class CreateBarangs < ActiveRecord::Migration
       t.string :code
       t.string :name
       t.text :description
-      t.float :harga, :default => 0
+      t.decimal :harga, :default => 0, precision: 13, scale: 2
+      t.decimal :min_bayar_po, :default => 0, precision: 13, scale: 2
 
       t.timestamps null: false
     end

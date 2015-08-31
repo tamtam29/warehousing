@@ -2,7 +2,8 @@
   <h1><i class="fa fa-user fa-fw"></i> Kasir</h1>
   <ol class="breadcrumb">
     <li class="nonactive"><i class="fa fa-user fa-fw"></i> Kasir</li>
-    <li class="avtive">Detail Barang Keluar</li>
+    <li><%= link_to pre_orders_path do %>Daftar Pre Order Barang<% end %></li>
+    <li class="avtive">Detail Pre Order Barang</li>
   </ol>
 </section>
 
@@ -10,7 +11,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Detail Barang Keluar</h2>
+        <h2>Detail Pre Order Barang</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -39,10 +40,12 @@
                   <th width="10%">Kode</th>
                   <th>Nama Barang</th>
                   <th width="2%">Jumlah</th>
-                  <th width="15%">Harga</th>
-                  <th width="15%">Tot. Harga</th>
-                  <th width="15%">Discount</th>
-                  <th width="15%">Total</th>
+                  <th width="10%">Harga</th>
+                  <th width="10%">Tot. Harga</th>
+                  <th width="10%">Discount</th>
+                  <th width="10%">Total</th>
+                  <th width="10%">PO (%)</th>
+                  <th width="10%">PO</th>
                 </tr>
                 <tbody>
                   <% @barang_keluar.detail_barang_keluars.each do |detail_barang_keluar| %>
@@ -53,7 +56,9 @@
                       <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.barang_keluar_barang.harga) %></td>
                       <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga_awal) %></td>
                       <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga_awal - detail_barang_keluar.total_harga) %></td>
-                      <td align="right" class="tunai"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga) %></td>
+                      <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga) %></td>
+                      <td align="right"><%= add_percentage(detail_barang_keluar.barang_keluar_barang.min_bayar_po) %></td>
+                      <td align="right" class="preorder"><%= "Rp. "+add_delimiter(detail_barang_keluar.pre_order) %></td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -74,10 +79,10 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6" style="border-top: 1px solid #ddd;padding-top: 5px;">
-                    <%= label_tag :grand_total, "GRAND TOTAL", class: "control-label"  %>
+                    <%= label_tag :grand_total, "GRAND TOTAL", class: "control-label grand_total_pre_order"  %>
                   </div>
                   <div class="col-sm-6" style="border-top: 1px solid #ddd;padding-top: 5px;">
-                    <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.grand_total)}", class: "control-label pull_right" %>
+                    <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.grand_total)}", class: "control-label pull_right grand_total_pre_order" %>
                   </div>
                 </div>
               </div>
@@ -85,11 +90,19 @@
               <div class="col-md-5">
                 <!-- <%#= link_to barang_keluar_path(1), class: "btn btn-default btn-xs", :onclick => 'window.print();return false;' do %><i class="fa fa-reply-all"></i> Ke transaksi baru<%# end %> -->
                 <div class="form-group">
-                  <div class="col-sm-6 tunai">
-                    <%= label_tag :grand_total, "GRAND TOTAL", class: "control-label grandtotal_show"  %>
+                  <div class="col-sm-6 preorder">
+                    <%= label_tag :grand_total, "PRE ORDER", class: "control-label grandtotal_show"  %>
                   </div>
-                  <div class="col-sm-6 tunai">
-                    <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.grand_total)}", class: "control-label pull_right grandtotal_show" %>
+                  <div class="col-sm-6 preorder">
+                    <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.pre_order)}", class: "control-label pull_right grandtotal_show" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <%= label_tag :grand_total, "Sisa Order", class: "control-label"  %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.grand_total - @barang_keluar.pre_order)}", class: "control-label pull_right" %>
                   </div>
                 </div>
                 <div class="form-group">
@@ -108,14 +121,14 @@
                     <%= label_tag :label_grand_total, "Rp. #{add_delimiter(@barang_keluar.kembalian)}", class: "control-label pull_right" %>
                   </div>
                 </div>
-                <center><%= link_to barang_keluar_path(1), class: "btn btn-success btn-lg cetak pull_right" do %><i class="fa fa-print"></i> Cetak<% end %></center>
+                <%= link_to barang_keluar_path(1), class: "btn btn-success btn-lg cetak pull_right" do %><i class="fa fa-print"></i> Cetak<% end %>
               </div>
             </div>
             <div class="ln_solid"></div>
 
           </div>
-          <%= link_to new_barang_keluar_path do %><i class="fa fa-reply-all"></i> Kembali ke pembayaran tunai<% end %>
         </div>
+        <%= link_to pre_orders_path do %><i class="fa fa-reply-all"></i> Kembali ke preorder<% end %>
       </div>
     </div>
   </div>

@@ -1,0 +1,30 @@
+<section class="content-header">
+  <h1><i class="fa fa-user fa-fw"></i> Kasir</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-user fa-fw"></i> Kasir</li>
+    <li><%= link_to pre_orders_path do %>Daftar Pre Order Barang<% end %></li>
+  </ol>
+</section>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Daftar Pre Order Barang</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-7">
+              <%= link_to new_pre_order_path, class: "btn btn-primary btn-sm" do %><i class="fa fa-plus-square"></i> Tambah Pre Order<% end %>
+            </div>
+          </div>
+        </div>
+        <div id="table_index">
+          <%= render 'table_index' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -56,9 +56,18 @@
         <% if can? :manage, BarangMasuk %>
           <li><%= link_to barang_masuks_path do %><i class="fa fa-arrow-circle-left fa-fw"></i> Barang Masuk<% end %></li>
         <% end %>
-        <% if can? :manage, BarangKeluar %>
-          <li><%= link_to new_barang_keluar_path do %><i class="fa fa-user fa-fw"></i> Kasir<% end %></li>
-        <% end %>
+        <li>
+          <a href="#"><i class="fa fa-user fa-fw"></i> Kasir<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <% if can? :manage, BarangKeluar %>
+              <li><%= link_to new_barang_keluar_path do %></i> Tunai<% end %></li>
+            <% end %>
+            <% if can? :manage, BarangKeluarPreOrder %>
+              <li><%= link_to pre_orders_path do %>Pre Order<% end %></li>
+            <% end %>
+          </ul>
+          <!-- /.nav-second-level -->
+        </li>
         <li>
           <a href="#"><i class="fa fa-file-archive-o fa-fw"></i> Report<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">

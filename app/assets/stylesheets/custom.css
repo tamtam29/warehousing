@@ -18,6 +18,12 @@
   -ms-transition: all .2s ease;
   transition: all .2s ease;
 }
+.tunai {
+  background-color: aliceblue;
+}
+.preorder {
+  background-color: oldlace;
+}
 .x_title {
   border-bottom: 1px solid #E6E9ED;
   padding: 1px 5px 6px;
@@ -239,7 +245,7 @@ div.ui-datepicker {
   float: right;
 }
 .cetak{
-  margin-top: 30px;
+  margin-top: 10px;
 }
 /*--- end table barang keluar ---*/
 
@@ -279,4 +285,13 @@ div.ui-datepicker {
 }
 .title_row.report:before {
     content: "\0BB \020";
+}
+
+
+.input-group .input-group-addon {
+  font-size: 12px;
+}
+
+.grand_total_pre_order {
+  text-decoration: line-through;
 }

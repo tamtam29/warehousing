@@ -1,19 +1,13 @@
-class BarangKeluarsController < ApplicationController
-  load_and_authorize_resource
+class PreOrdersController < ApplicationController
   before_action :set_barang_keluar, only: [:show, :edit, :update, :destroy]
 
-  # GET /barang_keluars
-  # GET /barang_keluars.json
   def index
-    @barang_keluars = BarangKeluar.all
+    @barang_keluars = BarangKeluar.where("payment_type like 'A2'").order("no_transaksi DESC").page(params[:page])
   end
 
-  # GET /barang_keluars/1
-  # GET /barang_keluars/1.json
   def show
   end
 
-  # GET /barang_keluars/new
   def new
     @barang_keluar = BarangKeluar.new
     @barang_keluar.tgl_keluar = DateTime.now.strftime("%Y/%m/%d %H:%m")
@@ -31,12 +25,6 @@ class BarangKeluarsController < ApplicationController
     end
   end
 
-  # GET /barang_keluars/1/edit
-  def edit
-  end
-
-  # POST /barang_keluars
-  # POST /barang_keluars.json
   def create
     params[:barang_keluar][:detail_barang_keluars_attributes].each do |item|
       barang = Barang.find(item[1][:barang_id])
@@ -67,41 +55,16 @@ class BarangKeluarsController < ApplicationController
     end
 
     @barang_keluar = BarangKeluar.new(barang_keluar_params)
-    @barang_keluar.payment_type = "A1"
+    @barang_keluar.payment_type = "A2"
     @barang_keluar.no_transaksi = BarangKeluar.generate_no_transaksi
     respond_to do |format|
       if @barang_keluar.save
-        decrease_stock(params[:barang_keluar][:detail_barang_keluars_attributes])
-        format.html { redirect_to @barang_keluar, notice: 'Barang keluar was successfully created.' }
+        format.html { redirect_to pre_order_path(@barang_keluar), notice: 'Barang keluar was successfully created.' }
         format.json { render :show, status: :created, location: @barang_keluar }
       else
         format.html { render :new }
         format.json { render json: @barang_keluar.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /barang_keluars/1
-  # PATCH/PUT /barang_keluars/1.json
-  def update
-    respond_to do |format|
-      if @barang_keluar.update(barang_keluar_params)
-        format.html { redirect_to @barang_keluar, notice: 'Barang keluar was successfully updated.' }
-        format.json { render :show, status: :ok, location: @barang_keluar }
-      else
-        format.html { render :edit }
-        format.json { render json: @barang_keluar.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /barang_keluars/1
-  # DELETE /barang_keluars/1.json
-  def destroy
-    @barang_keluar.destroy
-    respond_to do |format|
-      format.html { redirect_to barang_keluars_url, notice: 'Barang keluar was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -113,14 +76,6 @@ class BarangKeluarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_keluar_params
-      params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :bayar, :kembalian, :payment_type, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
-    end
-
-    def decrease_stock(detail_barang_keluars)
-      detail_barang_keluars.each do |detail_barang_keluar|
-        stok_barang = Stock.find(detail_barang_keluar[1][:barang_id])
-        stok_barang.jumlah = stok_barang.jumlah.to_i - detail_barang_keluar[1][:jumlah].to_i
-        stok_barang.save
-      end
+      params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :pre_order, :bayar, :kembalian, :payment_type, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga, :pre_order])
     end
 end

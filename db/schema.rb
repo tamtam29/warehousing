@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826014412) do
+ActiveRecord::Schema.define(version: 20150829015224) do
 
   create_table "barang_keluar_barangs", force: :cascade do |t|
     t.integer  "barang_keluar_category_id", limit: 4
@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20150826014412) do
     t.string   "code",                      limit: 255
     t.string   "name",                      limit: 255
     t.text     "description",               limit: 65535
-    t.float    "harga",                     limit: 24,    default: 0.0
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.decimal  "harga",                                   precision: 13, scale: 2, default: 0.0
+    t.decimal  "min_bayar_po",                            precision: 13, scale: 2, default: 0.0
+    t.datetime "created_at",                                                                     null: false
+    t.datetime "updated_at",                                                                     null: false
   end
 
   add_index "barang_keluar_barangs", ["barang_keluar_category_id"], name: "index_barang_keluar_barangs_on_barang_keluar_category_id", using: :btree
@@ -34,26 +35,38 @@ ActiveRecord::Schema.define(version: 20150826014412) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "barang_keluar_pre_orders", force: :cascade do |t|
+    t.integer  "barang_keluar_id", limit: 4
+    t.decimal  "nominal",                    precision: 13, scale: 2, default: 0.0
+    t.datetime "pre_order_date"
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+  end
+
+  add_index "barang_keluar_pre_orders", ["barang_keluar_id"], name: "index_barang_keluar_pre_orders_on_barang_keluar_id", using: :btree
+
   create_table "barang_keluar_promos", force: :cascade do |t|
     t.integer  "barang_keluar_barang_id", limit: 4
     t.string   "name",                    limit: 255
     t.string   "description",             limit: 255
-    t.integer  "threshold_qty",           limit: 4
-    t.float    "disc",                    limit: 24,  default: 0.0
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.integer  "threshold_qty",           limit: 4,                            default: 0
+    t.decimal  "disc",                                precision: 13, scale: 2, default: 0.0
+    t.datetime "created_at",                                                                 null: false
+    t.datetime "updated_at",                                                                 null: false
   end
 
   add_index "barang_keluar_promos", ["barang_keluar_barang_id"], name: "index_barang_keluar_promos_on_barang_keluar_barang_id", using: :btree
 
   create_table "barang_keluars", force: :cascade do |t|
     t.string   "no_transaksi", limit: 255
-    t.date     "tgl_keluar"
-    t.float    "grand_total",  limit: 24,  default: 0.0
-    t.float    "bayar",        limit: 24,  default: 0.0
-    t.float    "kembalian",    limit: 24,  default: 0.0
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "tgl_keluar"
+    t.decimal  "grand_total",              precision: 13, scale: 2, default: 0.0
+    t.decimal  "pre_order",                precision: 13, scale: 2, default: 0.0
+    t.decimal  "bayar",                    precision: 13, scale: 2, default: 0.0
+    t.decimal  "kembalian",                precision: 13, scale: 2, default: 0.0
+    t.string   "payment_type", limit: 255
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
   end
 
   create_table "barang_masuks", force: :cascade do |t|
@@ -74,9 +87,10 @@ ActiveRecord::Schema.define(version: 20150826014412) do
     t.string   "code",                       limit: 255
     t.string   "name",                       limit: 255
     t.text     "description",                limit: 65535
-    t.float    "harga",                      limit: 24,    default: 0.0
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.decimal  "harga",                                    precision: 13, scale: 2, default: 0.0
+    t.decimal  "min_bayar_po",                             precision: 13, scale: 2, default: 0.0
+    t.datetime "created_at",                                                                      null: false
+    t.datetime "updated_at",                                                                      null: false
     t.string   "gambar_barang_file_name",    limit: 255
     t.string   "gambar_barang_content_type", limit: 255
     t.integer  "gambar_barang_file_size",    limit: 4
@@ -96,11 +110,12 @@ ActiveRecord::Schema.define(version: 20150826014412) do
   create_table "detail_barang_keluars", force: :cascade do |t|
     t.integer  "barang_keluar_id",        limit: 4
     t.integer  "barang_keluar_barang_id", limit: 4
-    t.integer  "jumlah",                  limit: 4,  default: 0
-    t.float    "total_harga_awal",        limit: 24, default: 0.0
-    t.float    "total_harga",             limit: 24, default: 0.0
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.integer  "jumlah",                  limit: 4,                          default: 0
+    t.decimal  "total_harga_awal",                  precision: 13, scale: 2, default: 0.0
+    t.decimal  "total_harga",                       precision: 13, scale: 2, default: 0.0
+    t.decimal  "pre_order",                         precision: 13, scale: 2, default: 0.0
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
   end
 
   add_index "detail_barang_keluars", ["barang_keluar_barang_id"], name: "index_detail_barang_keluars_on_barang_keluar_barang_id", using: :btree
@@ -110,10 +125,10 @@ ActiveRecord::Schema.define(version: 20150826014412) do
     t.integer  "barang_id",     limit: 4
     t.string   "name",          limit: 255
     t.string   "description",   limit: 255
-    t.integer  "threshold_qty", limit: 4
-    t.float    "disc",          limit: 24
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "threshold_qty", limit: 4,                            default: 0
+    t.decimal  "disc",                      precision: 13, scale: 2, default: 0.0
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
   end
 
   add_index "promos", ["barang_id"], name: "index_promos_on_barang_id", using: :btree

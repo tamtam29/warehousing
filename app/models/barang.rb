@@ -4,7 +4,7 @@ class Barang < ActiveRecord::Base
   has_one :promo
 
   validates :code, :name, uniqueness: true, presence: true
-  validates :category_id, :unit_id, :harga, presence: true
+  validates :category_id, :unit_id, :harga, :min_bayar_po, presence: true
 
   has_attached_file :gambar_barang,
   :styles => { :medium => "300x300>", :thumb => "100x100>" },

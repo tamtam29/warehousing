@@ -16,7 +16,7 @@
         <td align="center"><%= link_to barang_masuk.no_transaksi, barang_masuk %></td>
         <td align="center"><%= link_to barang_masuk.barang.code, barang_masuk %></td>
         <td><%= link_to barang_masuk.barang.name, barang_masuk %></td>
-        <td align="right"><%= link_to barang_masuk.jumlah, barang_masuk %></td>
+        <td align="right"><%= link_to barang_masuk.jumlah.to_s + " " + barang_masuk.barang.unit.name, barang_masuk %></td>
         <!-- <td><%#= link_to edit_barang_masuk_path(barang_masuk), class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<%# end %></td>
         <td><%#= link_to barang_masuk, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do %><i class="fa fa-trash-o"></i> Delete<%# end %></td> -->
       </tr>

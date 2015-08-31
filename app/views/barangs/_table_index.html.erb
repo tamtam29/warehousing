@@ -6,6 +6,7 @@
       <th>Nama Barang</th>
       <th width="8%">Satuan</th>
       <th width="17%">Harga Satuan</th>
+      <th width="10%">Pembayaran <br>Pre Order</th>
       <th colspan="2" width="2%">Action</th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
         <td><%= link_to barang.name, barang %></td>
         <td><%= link_to barang.unit.name, barang %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang.harga), barang %></td>
+        <td align="right"><%= link_to add_percentage(barang.min_bayar_po), barang %></td>
         <td><%= link_to edit_barang_path(barang), class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<% end %></td>
         <td><%= link_to barang, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do %><i class="fa fa-trash-o"></i> Delete<% end %></td>
       </tr>

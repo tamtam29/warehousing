@@ -4,6 +4,7 @@ if @stock.barang
   json.code @stock.barang.code
   json.name @stock.barang.name
   json.harga @stock.barang.harga
+  json.min_bayar_po @stock.barang.min_bayar_po
 else
   json.barang nil
   json.code nil

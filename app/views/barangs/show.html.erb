@@ -36,6 +36,9 @@
             <div class="title_row">Harga Satuan</div><div class="data_row"><%= "Rp. "+add_delimiter(@barang.harga) %></div>
           </div>
           <div class="row row_content">
+            <div class="title_row">Pembayaran Preorder</div><div class="data_row"><%= add_percentage(@barang.min_bayar_po) %></div>
+          </div>
+          <div class="row row_content">
             <div class="title_row">Gambar Barang</div><div class="data_row"><%= image_tag @barang.gambar_barang.url(:medium) %></div>
           </div>
         </div>

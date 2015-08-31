@@ -1,5 +1,6 @@
 class BarangKeluar < ActiveRecord::Base
   has_many :detail_barang_keluars, :dependent => :delete_all
+  has_many :barang_keluar_pre_orders, :dependent => :delete_all
   accepts_nested_attributes_for :detail_barang_keluars, allow_destroy: true
 
   def self.generate_no_transaksi

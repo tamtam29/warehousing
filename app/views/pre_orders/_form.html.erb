@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="x_panel tunai">
+    <div class="x_panel preorder">
 
      <div class="x_content">
         <div class="table_barang">
@@ -12,11 +12,11 @@
   </div>
 </div>
 
-<%= form_for(@barang_keluar) do |f| %>
+<%= form_for @barang_keluar, url: pre_orders_path(), method: "POST" do |f| %>
 <div class="table_barang_keluar">
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel tunai">
+      <div class="x_panel preorder">
 
       <%= f.fields_for :detail_barang_keluars do |detail_barang_keluar| %>
       <div class="x_content">
@@ -52,10 +52,12 @@
               <th>Nama Barang</th>
               <th width="2%">Jumlah</th>
               <th>Satuan</th>
-              <th>Harga (Rp.)</th>
-              <th>Tot. Harga (Rp.)</th>
+              <th>Harga</th>
+              <th>Tot. Harga</th>
               <th>Disc. (%)</th>
-              <th>Total (Rp.)</th>
+              <th>Total</th>
+              <th>PO (%)</th>
+              <th>PO</th>
               <th width="2%">Action</th>
             </tr>
             <tbody class="append_body">
@@ -80,11 +82,18 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="form-group grandtotal">
-                <%= f.label :grand_total, "Grand Total (Rp.)", class: "col-sm-6 control-label"  %>
+              <div class="form-group">
+                <%= f.label :grand_total, "Grand Total (Rp.)", class: "col-sm-6 control-label grand_total_pre_order"  %>
                 <div class="col-sm-6">
-                  <%= label_tag :label_grand_total, '0', class: "col-sm-12 control-label", :id=>"label_grand_total" %>
+                  <%= label_tag :label_grand_total, '0', class: "col-sm-12 control-label grand_total_pre_order", :id=>"label_grand_total" %>
                   <%= hidden_field_tag :grand_total, '', :name=>"barang_keluar[grand_total]", :id=>"barang_keluar_grand_total" %>
+                </div>
+              </div>
+              <div class="form-group grandtotal">
+                <%= f.label :pre_order, "Pre Order (Rp.)", class: "col-sm-6 control-label"  %>
+                <div class="col-sm-6">
+                  <%= label_tag :label_pre_order, '0', class: "col-sm-12 control-label", :id=>"label_pre_order" %>
+                  <%= hidden_field_tag :pre_order, '', :name=>"barang_keluar[pre_order]", :id=>"barang_keluar_pre_order" %>
                 </div>
               </div>
             </div>
@@ -156,7 +165,7 @@
         item_detail += "<tr id='row_item_"+ index +"'>"
         item_detail += "<td align='center'>"+ json.code +"</td>";
         item_detail += "<td> <input type='hidden' id='barang_id_"+ index +"' class='form-control' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][barang_id]' value="+ json.barang_id +">"+ json.name +"</td>";
-        item_detail += "<td align='right'> <input onKeyUp='hitung_total("+ index +","+ json.jumlah +")' id='jumlah_"+ index +"' class='form-control input-sm' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][jumlah]' value=0></td>";
+        item_detail += "<td align='right'> <input onKeyUp='hitung_total("+ index +")' id='jumlah_"+ index +"' class='form-control input-sm' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][jumlah]' value=0></td>";
         item_detail += "<td align='center'>"+ json.unit +"</td>";
         item_detail += "<td align='right'><span id='harga_"+ index +"'>"+ accounting.formatMoney(json.harga, "", 2, ".", ",") +"</span></td>";
         item_detail += "<td align='right'><input type='hidden' id='field_total_harga_awal_"+ index +"' class='form-control' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][total_harga_awal]' value=0><span id='total_harga_awal_"+ index+ "'>"+ 0 +"</span></td>";
@@ -167,6 +176,13 @@
           item_detail += "<td align='right'><span id='discount_"+ index +"'>"+ json.disc+" / "+json.threshold_qty+" Barang</span></td>";
         }
         item_detail += "<td align='right'><input type='hidden' id='field_total_harga_"+ index +"' class='form-control' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][total_harga]' value=0><span id='total_harga_"+ index+ "'>"+ 0 +"</span></td>";
+        if (json.min_bayar_po == 0){
+          item_detail += "<td align='right'><span id='po_"+ index +"'>-</span></td>";
+        }
+        else{
+          item_detail += "<td align='right'><span id='po_"+ index +"'>"+ json.min_bayar_po+"</span></td>";
+        }
+        item_detail += "<td align='right'><input type='hidden' id='field_bayar_po_"+ index +"' class='form-control' name='barang_keluar[detail_barang_keluars_attributes]["+ index +"][pre_order]' value=0><span id='bayar_po_"+ index+ "'>"+ 0 +"</span></td>";
         item_detail += "<td align='center'><a class='btn btn-danger btn-xs' onclick='delete_row("+ index +", "+ id +")'><i class='fa fa-times'></i></a> </td>";
         item_detail += "</tr>";
 
@@ -190,54 +206,58 @@
     hitung_grand_total()
     hitung_kembalian()
   }
-  function hitung_total(index, max_jumlah){
-    if (max_jumlah == undefined){
-      max_jumlah = 0;
-    }
+  function hitung_total(index){
     var jumlah = parseFloat($("[id^='jumlah_"+index+"']").val());
-    if (jumlah <= max_jumlah) {
-      var harga = parseFloat(accounting.unformat($("[id^='harga_"+index+"']").text(), ","));
-      var discount = $("[id^='discount_"+index+"']").text();
-      if (discount != "-"){
-        var get_times_disc = Math.floor(jumlah / parseFloat(discount.split("/")[1]));
-        var harga_sebelum_disc = (get_times_disc * parseFloat(discount.split("/")[1]) * harga);
-        var potongan = ((parseFloat(discount.split("/")[0]) / 100) * harga_sebelum_disc);
-        var harga_setelah_disc = harga_sebelum_disc - potongan;
-        var total_harga = parseFloat(harga_setelah_disc) + ((jumlah - (get_times_disc * parseFloat(discount.split("/")[1]))) * harga);
-      } else {
-        var total_harga = jumlah * harga;
-      }
-      $("[id^='total_harga_awal_"+index+"']").text(accounting.formatMoney(harga * jumlah, "", 2, ".", ","));
-      $("[id^='field_total_harga_awal_"+index+"']").val(harga * jumlah);
-      $("[id^='total_harga_"+index+"']").text(accounting.formatMoney(total_harga, "", 2, ".", ","));
-      $("[id^='field_total_harga_"+index+"']").val(total_harga);
-      hitung_grand_total()
-      hitung_kembalian()
+    var harga = parseFloat(accounting.unformat($("[id^='harga_"+index+"']").text(), ","));
+    var discount = $("[id^='discount_"+index+"']").text();
+    var po = $("[id^='po_"+index+"']").text();
+    if (discount != "-"){
+      var get_times_disc = Math.floor(jumlah / parseFloat(discount.split("/")[1]));
+      var harga_sebelum_disc = (get_times_disc * parseFloat(discount.split("/")[1]) * harga);
+      var potongan = ((parseFloat(discount.split("/")[0]) / 100) * harga_sebelum_disc);
+      var harga_setelah_disc = harga_sebelum_disc - potongan;
+      var total_harga = parseFloat(harga_setelah_disc) + ((jumlah - (get_times_disc * parseFloat(discount.split("/")[1]))) * harga);
     } else {
-      $("[id^='jumlah_"+index+"']").val(max_jumlah);
-      hitung_total(index, max_jumlah)
-      alert("Maaf, Jumlah barang melebihi stok");
+      var total_harga = jumlah * harga;
     }
+    if (po != "-"){
+      var bayar_po = total_harga * po / 100;
+    } else {
+      var bayar_po = total_harga;
+    }
+    $("[id^='total_harga_awal_"+index+"']").text(accounting.formatMoney(harga * jumlah, "", 2, ".", ","));
+    $("[id^='field_total_harga_awal_"+index+"']").val(harga * jumlah);
+    $("[id^='total_harga_"+index+"']").text(accounting.formatMoney(total_harga, "", 2, ".", ","));
+    $("[id^='field_total_harga_"+index+"']").val(total_harga);
+    $("[id^='bayar_po_"+index+"']").text(accounting.formatMoney(bayar_po, "", 2, ".", ","));
+    $("[id^='field_bayar_po_"+index+"']").val(bayar_po);
+    hitung_grand_total()
+    hitung_kembalian()
   }
   function hitung_grand_total(){
     var grand_total = 0;
+    var grand_bayar_po = 0;
     for (i=0; i<row_id.length; i++){
       var tot_harga = parseFloat($("[id^='field_total_harga_"+row_id[i]+"']").val());
+      var bayar_po  = parseFloat($("[id^='field_bayar_po_"+row_id[i]+"']").val());
       grand_total = tot_harga + grand_total;
+      grand_bayar_po = bayar_po + grand_bayar_po;
     }
     $("#barang_keluar_grand_total").val(grand_total);
     $("#label_grand_total").text(accounting.formatMoney(grand_total, "", 2, ".", ","));
+    $("#barang_keluar_pre_order").val(grand_bayar_po);
+    $("#label_pre_order").text(accounting.formatMoney(grand_bayar_po, "", 2, ".", ","));
   }
   function hitung_kembalian(){
-    var grand_total = parseFloat($("#barang_keluar_grand_total").val());
+    var bayar_po = parseFloat($("#barang_keluar_pre_order").val());
     var bayar = $("#barang_keluar_bayar").val();
-    var kembalian = bayar - grand_total;
+    var kembalian = bayar - bayar_po;
     $("#barang_keluar_kembalian").val(kembalian);
     $("#field_kembalian").val(accounting.formatMoney(kembalian, "", 2, ".", ","));
     $("#label_bayar").text(accounting.formatMoney(bayar, "", 2, ".", ","));
     // appendButton()
     var tableSize = $('.barang_keluar tbody tr').length;
-    if (tableSize > 0 && kembalian > 0 && grand_total != 0){
+    if (tableSize > 0 && kembalian > 0 && bayar_po != 0){
       if ($('#button_submit_bk input').length == 0) {
         var button = ""
         button += "<a class='btn btn-primary btn-sm cancel_bk' href='/barang_keluars/new'>Cancel</a>"

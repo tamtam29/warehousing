@@ -9,6 +9,7 @@ class Ability
     if user.role == "User"
       can :read, Stock
       can :manage, BarangKeluar
+      can :manage, BarangKeluarPreOrder
     end
   end
 end

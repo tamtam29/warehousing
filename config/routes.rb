@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :barang_keluars
   resources :detail_barang_keluars
   resources :reports
+  resources :pre_orders
 
   get "report_barang_masuk" => "reports#report_barang_masuk", :as => :report_barang_masuk
   get "report_barang_masuk/:id" => "reports#show_report_barang_masuk", :as => :show_report_barang_masuk
