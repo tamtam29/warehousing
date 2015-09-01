@@ -1,6 +1,6 @@
 class BarangKeluar < ActiveRecord::Base
   has_many :detail_barang_keluars, :dependent => :delete_all
-  has_many :barang_keluar_pre_orders, :dependent => :delete_all
+  has_one :barang_keluar_pre_order
   accepts_nested_attributes_for :detail_barang_keluars, allow_destroy: true
 
   def self.generate_no_transaksi
@@ -13,4 +13,8 @@ class BarangKeluar < ActiveRecord::Base
     end
     "BK"+number.to_s
   end
+
+  # State [Lunas, Pre Order]
+  # Payment Type = A1 = Tunai
+  #                A2 = Pre Order
 end

@@ -8,6 +8,7 @@ class CreateBarangKeluars < ActiveRecord::Migration
       t.decimal :bayar, :default => 0, precision: 13, scale: 2
       t.decimal :kembalian, :default => 0, precision: 13, scale: 2
       t.string :payment_type
+      t.string :state
 
       t.timestamps null: false
     end

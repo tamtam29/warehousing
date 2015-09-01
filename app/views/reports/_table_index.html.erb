@@ -3,6 +3,7 @@
     <tr>
       <th width="15%">Tgl. Keluar</th>
       <th width="15%">No. Transaksi</th>
+      <th width="10%">Type</th>
       <th>Total Harga</th>
       <th>Discount</th>
       <th width="30%">Grand Total</th>
@@ -11,8 +12,9 @@
   <tbody>
     <% @barang_keluars.each do |barang_keluar| %>
       <tr>
-        <td align="center"><%= link_to barang_keluar.tgl_keluar.strftime("%d-%m-%Y %H:%M"), report_path(barang_keluar) %></td>
+        <td align="center"><%= link_to barang_keluar.tgl_keluar.strftime("%d-%m-%Y %H:%M"), barang_keluar_path(barang_keluar) %></td>
         <td align="center"><%= link_to barang_keluar.no_transaksi, report_path(barang_keluar) %></td>
+        <td align="center"><%= link_to barang_keluar.payment_type == "A1" ? "Tunai" : "Pre Order", report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal")), report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal") - barang_keluar.grand_total), report_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.grand_total), report_path(barang_keluar) %></td>
@@ -21,7 +23,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <th colspan="4" style="text-align:right;">GRAND TOTAL</th>
+      <th colspan="5" style="text-align:right;">GRAND TOTAL</th>
       <th colspan="1" style="text-align:right;"><%= "Rp. "+add_delimiter(@barang_keluars.sum("grand_total")).to_s %></th>
     </tr>
   </tfoot>

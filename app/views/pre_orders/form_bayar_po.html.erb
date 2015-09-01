@@ -1,0 +1,121 @@
+<section class="content-header">
+  <h1><i class="fa fa-user fa-fw"></i> Kasir</h1>
+  <ol class="breadcrumb">
+    <li class="nonactive"><i class="fa fa-user fa-fw"></i> Kasir</li>
+    <li><%= link_to pre_orders_path do %>Daftar Pre Order Barang<% end %></li>
+    <li class="avtive">Pelunasan Pre Order Barang</li>
+  </ol>
+</section>
+
+<div class="group_detail_po">
+  <div class="panel-heading preorder" id="accordion">
+    <h4 class="panel-title">
+      Detail Pre Order Barang [<%= @barang_keluar.no_transaksi %>]
+      <div class="pull-right">
+        <a data-toggle="collapse" data-parent="#accordion" href="#detail_preorder">
+          <i class="fa fa-angle-double-down"></i>
+        </a>
+      </div>
+    </h4>
+  </div>
+  <div id="detail_preorder" class="panel-collapse collapse">
+    <%= render 'show' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Pelunasan Pre Order Barang</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <%= form_for(@barang_keluar_pre_order, url: bayar_po_path(@barang_keluar), :html => {:class => "form-horizontal form-label-left"}) do |f| %>
+        <div class="x_content">
+          <div class="form-group">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <div class="form-group report">
+                <div class="row row_content">
+                  <div class="title_row report">Grand Total</div>
+                  <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.grand_total)}" %></div></div>
+                </div>
+                <div class="row row_content">
+                  <div class="title_row report">Pre Order</div>
+                  <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.pre_order)}" %></div></div>
+                </div>
+                <div class="row row_content">
+                  <div class="title_row report">Sisa Pembayaran</div>
+                  <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.grand_total - @barang_keluar.pre_order)}" %></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="form-group">
+            <%= f.label :pre_order_date, "Tanggal", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <%= f.text_field :pre_order_date, class: "form-control input-sm col-md-7 col-xs-12" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :bayar, "Bayar Tunai", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="input-group">
+                <span class="input-group-addon">Rp</span>
+                <%= f.text_field :bayar, class: "form-control input-sm col-md-7 col-xs-12" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :kembalian, "Kembalian", class: "control-label col-md-3 col-sm-3 col-xs-12" %>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="input-group">
+                <span class="input-group-addon">Rp</span>
+                <%= text_field_tag :field_kembalian, '', class: "form-control input-sm col-md-7 col-xs-12", value: 0, readonly: true %>
+                <%= hidden_field_tag :kembalian, '', :name=>"barang_keluar_pre_order[kembalian]", :id=>"barang_keluar_pre_order_kembalian" %>
+              </div>
+            </div>
+          </div>
+          <div class="ln_solid"></div>
+        </div>
+        <div class="x_content">
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <div id="button_submit_bk"></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#barang_keluar_pre_order_pre_order_date").datetimepicker();
+  });
+  $("#barang_keluar_pre_order_bayar").keyup(function(){
+    var bayar = parseFloat($(this).val());
+    $.getJSON("/pre_orders/"+<%= params[:pre_order_id] %>+".json",function(json){
+      var grand_total = parseFloat(json.grand_total);
+      var pre_order = parseFloat(json.pre_order);
+      var kembalian = bayar - (grand_total - pre_order);
+      $("#barang_keluar_pre_order_kembalian").val(kembalian);
+      $("#field_kembalian").val(accounting.formatMoney(kembalian, "", 2, ".", ","));
+      if (kembalian > 0){
+        if ($('#button_submit_bk input').length == 0) {
+          var button = ""
+          button += "<a class='btn btn-primary btn-sm cancel_bk' href='/pre_orders'>Cancel</a>"
+          button += "<input type='submit' name='commit' value='Bayar' class='btn btn-success btn-sm submit_bk'>"
+          $('#button_submit_bk').append(button);
+        }
+      } else {
+        $(".cancel_bk").remove();
+        $(".submit_bk").remove();
+      }
+    });
+  });
+</script>

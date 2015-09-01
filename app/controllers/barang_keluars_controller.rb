@@ -68,6 +68,7 @@ class BarangKeluarsController < ApplicationController
 
     @barang_keluar = BarangKeluar.new(barang_keluar_params)
     @barang_keluar.payment_type = "A1"
+    @barang_keluar.state = "Lunas"
     @barang_keluar.no_transaksi = BarangKeluar.generate_no_transaksi
     respond_to do |format|
       if @barang_keluar.save
@@ -113,7 +114,7 @@ class BarangKeluarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_keluar_params
-      params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :bayar, :kembalian, :payment_type, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
+      params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :bayar, :kembalian, :payment_type, :state, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga])
     end
 
     def decrease_stock(detail_barang_keluars)

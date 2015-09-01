@@ -1,0 +1,1 @@
+json.extract! @barang_keluar, :id, :no_transaksi, :tgl_keluar, :grand_total, :pre_order, :bayar, :kembalian, :payment_type

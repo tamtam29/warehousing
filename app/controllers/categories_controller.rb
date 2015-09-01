@@ -5,7 +5,15 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.page(params[:page])
+    query = params[:query] ? params[:query].downcase : ""
+    respond_to do |format|
+      format.html {
+        @categories = Category.page(params[:page])
+      }
+      format.json {
+        @categories = Category.where("(lower(code) like '%#{query}%' or lower(name) like '%#{query}%')")
+      }
+    end
   end
 
   # GET /categories/1

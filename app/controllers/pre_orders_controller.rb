@@ -1,8 +1,8 @@
 class PreOrdersController < ApplicationController
-  before_action :set_barang_keluar, only: [:show, :edit, :update, :destroy]
+  before_action :set_barang_keluar, only: [:show]
 
   def index
-    @barang_keluars = BarangKeluar.where("payment_type like 'A2'").order("no_transaksi DESC").page(params[:page])
+    @barang_keluars = BarangKeluar.where("payment_type like 'A2' AND state like 'Pre Order'").order("no_transaksi DESC").page(params[:page])
   end
 
   def show
@@ -56,16 +56,44 @@ class PreOrdersController < ApplicationController
 
     @barang_keluar = BarangKeluar.new(barang_keluar_params)
     @barang_keluar.payment_type = "A2"
+    @barang_keluar.state = "Pre Order"
     @barang_keluar.no_transaksi = BarangKeluar.generate_no_transaksi
     respond_to do |format|
       if @barang_keluar.save
-        format.html { redirect_to pre_order_path(@barang_keluar), notice: 'Barang keluar was successfully created.' }
+        format.html { redirect_to pre_order_path(@barang_keluar), notice: 'Pre Order was successfully created.' }
         format.json { render :show, status: :created, location: @barang_keluar }
       else
         format.html { render :new }
         format.json { render json: @barang_keluar.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def form_bayar_po
+    @barang_keluar = BarangKeluar.find(params[:pre_order_id])
+    @barang_keluar_pre_order = BarangKeluarPreOrder.new()
+    @barang_keluar_pre_order.pre_order_date = DateTime.now.strftime("%Y/%m/%d %H:%m")
+  end
+
+  def bayar_po
+    barang_keluar = BarangKeluar.find(params[:pre_order_id])
+    params[:barang_keluar_pre_order]["barang_keluar_id"] = barang_keluar.id
+    @barang_keluar_pre_order = BarangKeluarPreOrder.new(barang_keluar_pre_order_params)
+    respond_to do |format|
+      if @barang_keluar_pre_order.save
+        barang_keluar.state = "Lunas"
+        barang_keluar.save
+        format.html { redirect_to show_bayar_po_path(params[:pre_order_id]), notice: 'Pre Order was successfully paid.' }
+        format.json { render :show, status: :created, location: @barang_keluar }
+      else
+        format.html { redirect_to form_bayar_po_path(params[:pre_order_id]) }
+        format.json { render json: @barang_keluar_pre_order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def show_bayar_po
+    @barang_keluar = BarangKeluar.find(params[:pre_order_id])
   end
 
   private
@@ -77,5 +105,9 @@ class PreOrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def barang_keluar_params
       params.require(:barang_keluar).permit(:id, :no_transaksi, :tgl_keluar, :grand_total, :pre_order, :bayar, :kembalian, :payment_type, :detail_barang_keluars_attributes => [:id, :barang_keluar_id, :barang_keluar_barang_id, :jumlah, :total_harga_awal, :total_harga, :pre_order])
+    end
+
+    def barang_keluar_pre_order_params
+      params.require(:barang_keluar_pre_order).permit(:id, :barang_keluar_id, :bayar, :kembalian, :pre_order_date)
     end
 end

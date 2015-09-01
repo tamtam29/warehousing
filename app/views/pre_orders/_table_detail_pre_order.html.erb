@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= label_tag :tgl_keluar, "Tanggal Keluar", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= label_tag :label_tgl_keluar, @barang_keluar.tgl_keluar.strftime("%d-%m-%Y %H:%M"), class: "col-sm-8 control-label" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+      <div class="col-sm-12">
+        <%= label_tag :label_bayar, "No. Transaksi: #{add_delimiter(@barang_keluar.no_transaksi)}", class: "control-label pull_right" %>
+      </div>
+  </div>
+</div>
+
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <th width="10%">Kode</th>
+      <th>Nama Barang</th>
+      <th width="2%">Jumlah</th>
+      <th width="10%">Harga</th>
+      <th width="10%">Tot. Harga</th>
+      <th width="10%">Discount</th>
+      <th width="10%">Total</th>
+      <th width="10%">PO (%)</th>
+      <th width="10%">PO</th>
+    </tr>
+    <tbody>
+      <% @barang_keluar.detail_barang_keluars.each do |detail_barang_keluar| %>
+        <tr>
+          <td align="center"><%= detail_barang_keluar.barang_keluar_barang.code %></td>
+          <td><%= detail_barang_keluar.barang_keluar_barang.name %></td>
+          <td align="right"><%= detail_barang_keluar.jumlah.to_s + " " + detail_barang_keluar.barang_keluar_barang.unit.name %></td>
+          <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.barang_keluar_barang.harga) %></td>
+          <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga_awal) %></td>
+          <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga_awal - detail_barang_keluar.total_harga) %></td>
+          <td align="right"><%= "Rp. "+add_delimiter(detail_barang_keluar.total_harga) %></td>
+          <td align="right"><%= add_percentage(detail_barang_keluar.barang_keluar_barang.min_bayar_po) %></td>
+          <td align="right" class="preorder"><%= "Rp. "+add_delimiter(detail_barang_keluar.pre_order) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </thead>
+</table>

@@ -19,7 +19,7 @@
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.detail_barang_keluars.sum("total_harga_awal") - barang_keluar.grand_total), pre_order_path(barang_keluar) %></td>
         <td align="right"><%= link_to "Rp. "+add_delimiter(barang_keluar.grand_total), pre_order_path(barang_keluar) %></td>
         <td align="right" class="preorder"><%= link_to "Rp. "+add_delimiter(barang_keluar.pre_order), pre_order_path(barang_keluar) %></td>
-        <td><%= link_to "", class: "btn btn-default btn-xs" do %><i class="fa fa-pencil-square-o"></i> Edit<% end %></td>
+        <td><%= link_to form_bayar_po_path(barang_keluar), class: "btn btn-info btn-xs" do %><i class="fa fa-shopping-cart"></i> Bayar<% end %></td>
       </tr>
     <% end %>
   </tbody>

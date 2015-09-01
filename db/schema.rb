@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20150829015224) do
 
   create_table "barang_keluar_pre_orders", force: :cascade do |t|
     t.integer  "barang_keluar_id", limit: 4
-    t.decimal  "nominal",                    precision: 13, scale: 2, default: 0.0
     t.datetime "pre_order_date"
+    t.decimal  "bayar",                      precision: 13, scale: 2, default: 0.0
+    t.decimal  "kembalian",                  precision: 13, scale: 2, default: 0.0
     t.datetime "created_at",                                                        null: false
     t.datetime "updated_at",                                                        null: false
   end
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150829015224) do
     t.decimal  "bayar",                    precision: 13, scale: 2, default: 0.0
     t.decimal  "kembalian",                precision: 13, scale: 2, default: 0.0
     t.string   "payment_type", limit: 255
+    t.string   "state",        limit: 255
     t.datetime "created_at",                                                      null: false
     t.datetime "updated_at",                                                      null: false
   end

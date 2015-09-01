@@ -10,7 +10,9 @@ class ReportsController < ApplicationController
       query_date = "AND CAST(barang_keluars.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
     if query_date != nil
-      @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%' #{query_date}")
+      @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%'
+                                            AND state like 'Lunas'
+                                            #{query_date}")
                                     .order("barang_keluars.no_transaksi DESC")
                                     .page(params[:page])
     else
