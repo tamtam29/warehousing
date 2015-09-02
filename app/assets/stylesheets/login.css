@@ -1,0 +1,232 @@
+nav #ul_login {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  float: right;
+  background: #eee;
+  border-bottom: 1px solid #fff;
+  border-radius: 3px;
+}
+
+nav #login, #signup{
+  float: left;
+}
+
+nav #login {
+  border-right: 1px solid #ddd;
+}
+
+nav #login-trigger,
+nav #signup a {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  height: 25px;
+  line-height: 25px;
+  font-weight: bold;
+  padding: 0 8px;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 12px;
+}
+
+nav #signup a {
+  border-radius: 0 3px 3px 0;
+}
+
+nav #login-trigger {
+  border-radius: 3px 0 0 3px;
+}
+
+nav #login-trigger:hover,
+nav #login .active,
+nav #signup a:hover {
+  background: #fff;
+}
+
+nav #login-content {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: 0;
+  z-index: 999;
+  background: #fff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+  padding: 15px;
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+  border-radius: 3px 0 3px 3px;
+}
+
+nav li #login-content {
+  right: 0;
+  width: 250px;
+}
+
+/*--------------------*/
+
+#inputs input {
+  background: #f1f1f1;
+  padding: 6px 5px;
+  margin: 0 0 5px 0;
+  width: 221px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#inputs input:focus {
+  background-color: #fff;
+  border-color: #e8c291;
+  outline: none;
+  box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
+/*--------------------*/
+
+#login #actions {
+  margin: 10px 0 0 0;
+}
+
+#login #submit {
+  background-color: #d14545;
+  background-image: linear-gradient(top, #e97171, #d14545);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  text-shadow: 0 1px 0 rgba(0,0,0,.5);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+  border: 1px solid #7e1515;
+  float: left;
+  height: 30px;
+  padding: 0;
+  width: 100px;
+  cursor: pointer;
+  font: bold 14px Arial, Helvetica;
+  color: #fff;
+}
+
+#login #submit:hover,
+#login #submit:focus {
+  background-color: #e97171;
+  background-image: linear-gradient(top, #d14545, #e97171);
+}
+
+#login #submit:active {
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+}
+
+#login #submit::-moz-focus-inner {
+  border: none;
+}
+
+#login label {
+  float: right;
+  line-height: 30px;
+}
+
+#login label input {
+  position: relative;
+  top: 2px;
+  right: 2px;
+}
+
+.button-login {
+  padding: 10px;
+  border-color: #e7e7e7;
+}
+
+.image_login {
+  border-radius: 50% 50% 50% 50%;
+  border: 1px solid;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+#wrapper_login {
+  /* Center wrapper perfectly */
+  height: 400px;
+  margin: 70px auto;
+}
+
+/*******************
+LOGIN FORM
+*******************/
+
+.login-form {
+  width: 600px;
+  margin: 0 auto;
+  position: relative;
+
+  background: #f3f3f3;
+  border: 1px solid #fff;
+  border-radius: 5px;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/*******************
+HEADER
+*******************/
+
+.login-form .header {
+  padding: 0px 30px 30px 30px;
+}
+
+.login-form .header h1 {
+  font-family: 'Bree Serif', serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height:34px;
+  color: #414848;
+  text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+  margin-bottom: 10px;
+}
+
+.login-form .header span {
+  font-size: 13px;
+  line-height: 16px;
+  color: #678889;
+  text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+}
+
+/*******************
+FOOTER
+*******************/
+
+.login-form .footer {
+  padding: 10px;
+  overflow: auto;
+
+  background: #d4dedf;
+  border-top: 1px solid #fff;
+
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+  -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+  -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+}
+
+.gradient {
+  /* Center Positioning */
+  width: 1200px;
+  height: 800px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -600px;
+  margin-top: -450px;
+  z-index: -2;
+
+  /* Fallback */
+  background-image: url(images/gradient.png);
+  background-repeat: no-repeat;
+
+  /* CSS3 Gradient */
+  background-image: -webkit-gradient(radial, 0% 0%, 0% 100%, from(rgba(213,246,255,1)), to(rgba(213,246,255,0)));
+  background-image: -webkit-radial-gradient(50% 50%, 40% 40%, rgba(213,246,255,1), rgba(213,246,255,0));
+  background-image: -moz-radial-gradient(50% 50%, 50% 50%, rgba(213,246,255,1), rgba(213,246,255,0));
+  background-image: -ms-radial-gradient(50% 50%, 50% 50%, rgba(213,246,255,1), rgba(213,246,255,0));
+  background-image: -o-radial-gradient(50% 50%, 50% 50%, rgba(213,246,255,1), rgba(213,246,255,0));
+}

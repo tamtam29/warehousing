@@ -1,5 +1,7 @@
 User.create([
-  {first_name: "Adi", last_name: "Tiatama", username: "adi_tiatama", email: "aditiatama@gmail.com", role: "Admin", password: "12345678", password_confirmation: "12345678"}
+  {first_name: "Adi", last_name: "Tiatama", username: "adi_tiatama", email: "aditiatama@gmail.com", role: "Admin", password: "12345678", password_confirmation: "12345678"},
+  {first_name: "Admin", last_name: "123", username: "admin", email: "admin@gmail.com", role: "Admin", password: "admin123", password_confirmation: "admin123"},
+  {first_name: "User", last_name: "123", username: "user", email: "user@gmail.com", role: "User", password: "user1234", password_confirmation: "user1234"}
 ])
 # Category.create([
 #   { code: 'CAT0001', name: 'Pakaian' },

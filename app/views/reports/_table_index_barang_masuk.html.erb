@@ -15,7 +15,7 @@
         <td align="center"><%= link_to barang_masuk.no_transaksi, show_report_barang_masuk_path(barang_masuk) %></td>
         <td align="center"><%= link_to barang_masuk.barang.code, show_report_barang_masuk_path(barang_masuk) %></td>
         <td><%= link_to barang_masuk.barang.name, show_report_barang_masuk_path(barang_masuk) %></td>
-        <td align="right"><%= link_to barang_masuk.jumlah, show_report_barang_masuk_path(barang_masuk) %></td>
+        <td align="right"><%= link_to barang_masuk.jumlah.to_s + " " + barang_masuk.barang.unit.name, barang_masuk, show_report_barang_masuk_path(barang_masuk) %></td>
       </tr>
     <% end %>
   </tbody>
