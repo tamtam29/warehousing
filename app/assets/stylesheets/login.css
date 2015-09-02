@@ -142,6 +142,10 @@ nav li #login-content {
   border: 1px solid;
 }
 
+.alert-login {
+  width: 600px;
+  margin: auto;
+}
 /*------------------------------------------------------------------------------------------------------*/
 #wrapper_login {
   /* Center wrapper perfectly */
