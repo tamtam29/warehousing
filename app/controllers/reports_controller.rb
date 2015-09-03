@@ -19,12 +19,12 @@ class ReportsController < ApplicationController
       @barang_keluars = BarangKeluar.where("id = 0").page(params[:page])
     end
 
-    authorize! :manage, BarangKeluar
+    authorize! :read, BarangKeluar
   end
 
   def show
     @barang_keluar = BarangKeluar.find(params[:id])
-    authorize! :manage, BarangKeluar
+    authorize! :read, BarangKeluar
   end
 
   def report_barang_masuk
@@ -56,5 +56,29 @@ class ReportsController < ApplicationController
   def show_report_barang_masuk
     @barang_masuk = BarangMasuk.find(params[:id])
     authorize! :manage, BarangMasuk
+  end
+
+  def transaksi_rumah_asi_bjn
+    no_transaksi = params[:no_transaksi] ? params[:no_transaksi].upcase : ""
+    start_date = params[:start_date] ? params[:start_date] : ""
+    end_date = params[:end_date] ? params[:end_date] : ""
+
+    if start_date == "" or end_date == ""
+      query_date = nil
+    else
+      query_date = "AND CAST(barang_keluars.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+    end
+
+    if query_date != nil
+      @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%'
+                                            AND state like 'Lunas'
+                                            #{query_date}")
+                                    .order("barang_keluars.no_transaksi DESC")
+                                    .page(params[:page])
+    end
+
+    respond_to do |format|
+      format.xls
+    end
   end
 end

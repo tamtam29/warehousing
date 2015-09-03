@@ -3,9 +3,11 @@ class PreOrdersController < ApplicationController
 
   def index
     @barang_keluars = BarangKeluar.where("payment_type like 'A2' AND state like 'Pre Order'").order("no_transaksi DESC").page(params[:page])
+    authorize! :read, BarangKeluar
   end
 
   def show
+    authorize! :read, @barang_keluars
   end
 
   def new
@@ -23,6 +25,7 @@ class PreOrdersController < ApplicationController
     else
       @stocks = Stock.where("id = 0").page(params[:page])
     end
+    authorize! :create, BarangKeluar
   end
 
   def create
@@ -67,12 +70,14 @@ class PreOrdersController < ApplicationController
         format.json { render json: @barang_keluar.errors, status: :unprocessable_entity }
       end
     end
+    authorize! :create, BarangKeluar
   end
 
   def form_bayar_po
     @barang_keluar = BarangKeluar.find(params[:pre_order_id])
     @barang_keluar_pre_order = BarangKeluarPreOrder.new()
     @barang_keluar_pre_order.pre_order_date = DateTime.now.strftime("%Y/%m/%d %H:%m")
+    authorize! :read, @barang_keluar
   end
 
   def bayar_po
@@ -90,10 +95,12 @@ class PreOrdersController < ApplicationController
         format.json { render json: @barang_keluar_pre_order.errors, status: :unprocessable_entity }
       end
     end
+    authorize! :create, BarangKeluar
   end
 
   def show_bayar_po
     @barang_keluar = BarangKeluar.find(params[:pre_order_id])
+    authorize! :read, @barang_keluar
   end
 
   private

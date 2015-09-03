@@ -22,9 +22,11 @@
   </ul>
 </nav>
 
+<% if alert != "You need to sign in or sign up before continuing." %>
 <div class="alert-login">
   <p <% if alert %> class="alert alert-danger" <% end %> ><%= alert %></p>
 </div>
+<% end %>
 
 <div class="login-form">
   <div class="header">

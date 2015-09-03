@@ -16,4 +16,11 @@ class StocksController < ApplicationController
   def show
     @stock = Stock.joins(barang: :unit).find(params[:id])
   end
+
+  def stock_barang_rumah_asi_bjn
+    @stocks = Stock.joins(:barang).order("barangs.code ASC")
+    respond_to do |format|
+      format.xls
+    end
+  end
 end

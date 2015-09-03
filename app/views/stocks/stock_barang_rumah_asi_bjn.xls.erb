@@ -1,0 +1,20 @@
+<table border="1">
+  <thead>
+    <tr>
+      <th style="background-color: yellow;"><strong>Kode Barang</strong></th>
+      <th style="background-color: yellow;" width="400"><strong>Nama Barang</strong></th>
+      <th style="background-color: yellow;"><strong>Stok</strong></th>
+      <th style="background-color: yellow;"><strong>Satuan</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.barang.code %></td>
+        <td><%= stock.barang.name %></td>
+        <td><%= stock.jumlah %></td>
+        <td><%= stock.barang.unit.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

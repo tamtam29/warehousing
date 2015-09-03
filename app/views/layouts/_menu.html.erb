@@ -59,10 +59,10 @@
         <li>
           <a href="#"><i class="fa fa-user fa-fw"></i> Kasir<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <% if can? :manage, BarangKeluar %>
+            <% if can? :create, BarangKeluar %>
               <li><%= link_to new_barang_keluar_path do %></i> Tunai<% end %></li>
             <% end %>
-            <% if can? :manage, BarangKeluarPreOrder %>
+            <% if can? :create, BarangKeluarPreOrder %>
               <li><%= link_to pre_orders_path do %>Pre Order<% end %></li>
             <% end %>
           </ul>
@@ -71,7 +71,7 @@
         <li>
           <a href="#"><i class="fa fa-file-archive-o fa-fw"></i> Report<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <% if can? :manage, BarangKeluar %>
+            <% if can? :read, BarangKeluar %>
               <li><%= link_to reports_path do %>Barang Keluar<% end %></li>
             <% end %>
             <% if can? :manage, BarangMasuk %>

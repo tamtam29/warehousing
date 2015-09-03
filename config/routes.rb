@@ -17,9 +17,13 @@ Rails.application.routes.draw do
   # reports
   get "report_barang_masuk" => "reports#report_barang_masuk", :as => :report_barang_masuk
   get "report_barang_masuk/:id" => "reports#show_report_barang_masuk", :as => :show_report_barang_masuk
+  get "transaksi_rumah_asi_bjn" => "reports#transaksi_rumah_asi_bjn", :as => :transaksi_rumah_asi_bjn
 
   # pre_orders
   get "pre_orders/:pre_order_id/form_bayar_po" => "pre_orders#form_bayar_po", :as => :form_bayar_po
   post "pre_orders/:pre_order_id/bayar_po" => "pre_orders#bayar_po", :as => :bayar_po
   get "pre_orders/:pre_order_id/show_bayar_po" => "pre_orders#show_bayar_po", :as => :show_bayar_po
+
+  # stock
+  get "stock_barang_rumah_asi_bjn" => "stocks#stock_barang_rumah_asi_bjn", :as => :stock_barang_rumah_asi_bjn
 end
