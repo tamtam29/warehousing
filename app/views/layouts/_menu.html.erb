@@ -71,7 +71,7 @@
         <li>
           <a href="#"><i class="fa fa-file-archive-o fa-fw"></i> Report<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <% if can? :read, BarangKeluar %>
+            <% if can? :create, BarangKeluar %>
               <li><%= link_to reports_path do %>Barang Keluar<% end %></li>
             <% end %>
             <% if can? :manage, BarangMasuk %>

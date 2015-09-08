@@ -33,7 +33,8 @@
     <h1><%= image_tag("rumah_asi_bjn.jpg", height: '80', width: '80', class: "image_login") %> Rumah ASI Bojonegoro</h1>
   </div>
   <div class="footer">
-    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="200" src="https://maps.google.com/maps?hl=en&q=bojonegoro, jalan agus salim&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">source: www.embedgooglemaps.com</a></small></div><div><small><a href="http://embedgooglemaps.com">source: www.embedgooglemaps.com</a></small></div></iframe>
+    <div id="map" style="height:250px"></div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&callback=initMap"></script>
   </div>
   <div class="header">
     <center><span><br>Jalan Agus Salim, Toko No. 6<br>Samping Masjid Agung Darussalam, Alun alun Bojonegoro<br>Bojonegoro, Indonesia 62113</span></center>
@@ -60,7 +61,39 @@ $(document).ready(function(){
     $(this).toggleClass('active');
 
     if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-      else $(this).find('span').html('&#x25BC;')
-    })
+    else $(this).find('span').html('&#x25BC;')
+  })
+});
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: {lat: -7.149774, lng: 111.879077}
   });
+
+  var marker = new google.maps.Marker({
+    map: map,
+    // Define the place with a location, and a query string.
+    place: {
+      location: {lat: -7.149774, lng: 111.879077},
+      query: 'Jalan Agus Salim, Kecamatan Bojonegoro, Bojonegoro'
+
+    },
+    // Attributions help users find your site again.
+    attribution: {
+      source: 'Google Maps JavaScript API',
+      webUrl: 'https://developers.google.com/maps/'
+    }
+  });
+
+  // Construct a new InfoWindow.
+  var infoWindow = new google.maps.InfoWindow({
+    content: 'Rumah ASI Bojonegoro'
+  });
+
+  // Opens the InfoWindow when marker is clicked.
+  marker.addListener('click', function() {
+    infoWindow.open(map, marker);
+  });
+}
 </script>
