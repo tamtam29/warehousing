@@ -227,10 +227,10 @@
     }
     $("[id^='total_harga_awal_"+index+"']").text(accounting.formatMoney(harga * jumlah, "", 2, ".", ","));
     $("[id^='field_total_harga_awal_"+index+"']").val(harga * jumlah);
-    $("[id^='total_harga_"+index+"']").text(accounting.formatMoney(total_harga, "", 2, ".", ","));
-    $("[id^='field_total_harga_"+index+"']").val(total_harga);
-    $("[id^='bayar_po_"+index+"']").text(accounting.formatMoney(bayar_po, "", 2, ".", ","));
-    $("[id^='field_bayar_po_"+index+"']").val(bayar_po);
+    $("[id^='total_harga_"+index+"']").text(accounting.formatMoney(Math.ceil(total_harga), "", 2, ".", ","));
+    $("[id^='field_total_harga_"+index+"']").val(Math.ceil(total_harga));
+    $("[id^='bayar_po_"+index+"']").text(accounting.formatMoney(Math.ceil(bayar_po), "", 2, ".", ","));
+    $("[id^='field_bayar_po_"+index+"']").val(Math.ceil(bayar_po));
     hitung_grand_total()
     hitung_kembalian()
   }

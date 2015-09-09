@@ -20,7 +20,7 @@ class BarangsController < ApplicationController
                          .page(params[:page])
       }
       format.json {
-        @barangs = Barang.where("(lower(code) like '%#{query}%' or lower(name) like '%#{query}%')")
+        @barangs = Barang.where("(lower(code) like '%#{query}%' or lower(name) like '%#{query}%')").order("barangs.code ASC")
       }
     end
   end
