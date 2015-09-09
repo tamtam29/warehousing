@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "AND CAST(barang_keluars.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
     if query_date != nil
       @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%'
@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "CAST(barang_masuks.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "CAST(barang_masuks.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
 
     if query_date != nil
@@ -58,6 +58,55 @@ class ReportsController < ApplicationController
     authorize! :manage, BarangMasuk
   end
 
+  def report_pemasukan
+    start_date = params[:start_date] ? params[:start_date] : ""
+    end_date = params[:end_date] ? params[:end_date] : ""
+
+    if start_date == "" or end_date == ""
+      query_date = nil
+    else
+      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+    end
+    if query_date != nil
+      @barang_keluars = BarangKeluar.select("DATE(tgl_keluar) as tanggal, sum(grand_total) as grand_total")
+                                    .where("state like 'Lunas' #{query_date}")
+                                    .group("DATE(tgl_keluar)")
+                                    .order("tanggal ASC")
+                                    .page(params[:page])
+      @grand_total = BarangKeluar.where("state like 'Lunas' #{query_date}")
+                                 .select("DISTINCT sum(grand_total) as nominal")
+    else
+      @barang_keluars = BarangKeluar.where("id = 0").page(params[:page])
+    end
+
+    authorize! :manage, User
+  end
+
+  # save to excel ===============================================================================================
+  def pemasukan_rumah_asi_bjn
+    start_date = params[:start_date] ? params[:start_date] : ""
+    end_date = params[:end_date] ? params[:end_date] : ""
+
+    if start_date == "" or end_date == ""
+      query_date = nil
+    else
+      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+    end
+    if query_date != nil
+      @barang_keluars = BarangKeluar.select("DATE(tgl_keluar) as tanggal, sum(grand_total) as grand_total")
+                                    .where("state like 'Lunas' #{query_date}")
+                                    .group("DATE(tgl_keluar)")
+                                    .order("tanggal ASC")
+                                    .page(params[:page])
+      @grand_total = BarangKeluar.where("state like 'Lunas' #{query_date}")
+                                 .select("DISTINCT sum(grand_total) as nominal")
+    end
+
+    respond_to do |format|
+      format.xls
+    end
+  end
+
   def transaksi_rumah_asi_bjn
     no_transaksi = params[:no_transaksi] ? params[:no_transaksi].upcase : ""
     start_date = params[:start_date] ? params[:start_date] : ""
@@ -66,7 +115,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "AND CAST(barang_keluars.created_at as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
 
     if query_date != nil

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :pre_orders
 
   # reports
+  get "report_pemasukan" => "reports#report_pemasukan", :as => :report_pemasukan
+  get "pemasukan_rumah_asi_bjn" => "reports#pemasukan_rumah_asi_bjn", :as => :pemasukan_rumah_asi_bjn
   get "report_barang_masuk" => "reports#report_barang_masuk", :as => :report_barang_masuk
   get "report_barang_masuk/:id" => "reports#show_report_barang_masuk", :as => :show_report_barang_masuk
   get "transaksi_rumah_asi_bjn" => "reports#transaksi_rumah_asi_bjn", :as => :transaksi_rumah_asi_bjn

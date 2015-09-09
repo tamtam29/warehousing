@@ -3,7 +3,7 @@
   <h1><i class="fa fa-file-archive-o fa-fw"></i> Report</h1>
   <ol class="breadcrumb">
     <li class="nonactive"><i class="fa fa-file-archive-o fa-fw"></i> Report</li>
-    <li><%= link_to report_barang_masuk_path do %>Report Barang Masuk<% end %></li>
+    <li><%= link_to report_pemasukan_path do %>Report Pemasukan<% end %></li>
   </ol>
 </section>
 
@@ -11,11 +11,11 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Report Barang Masuk</h2>
+        <h2>Report Pemasukan Rumah ASI Bjn</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <%= form_tag report_barang_masuk_path, method: "GET" do %>
+        <%= form_tag report_pemasukan_path, method: "GET" do %>
           <div class="form-group row">
             <div class="col-md-2">
               <%= label_tag :start_date, "Start Date", class: "control-label" %>
@@ -25,22 +25,17 @@
               <%= label_tag :end_date, "End Date", class: "control-label" %>
               <%= text_field_tag :end_date, DateTime.now.to_date.strftime("%Y/%m/%d"), class: "form-control input-sm" %>
             </div>
-            <div class="col-md-4">
-              <%= label_tag :keyword, "Keywoard", class: "control-label" %>
-              <%= text_field_tag :name, params[:name], id:"search_name", class: "form-control input-sm", placeholder: "Cari berdasarkan keyword" %>
-            </div>
             <div class="col-md-2">
               <div class="input-group input-group-sm">
-                <%= submit_tag "Search", class: "btn btn-success btn-sm", style: "margin-top:25px;" %>
+                <%= submit_tag "Search", class: "btn btn-success btn-sm", style: "margin-top:23px;" %>
               </div>
             </div>
           </div>
         <% end %>
-        <div id="table_index_barang_masuk">
-          <%= render 'table_index_barang_masuk' %>
+        <div id="table_index">
+          <%= render 'table_index_pemasukan' %>
         </div>
       </div>
     </div>
   </div>
 </div>
-

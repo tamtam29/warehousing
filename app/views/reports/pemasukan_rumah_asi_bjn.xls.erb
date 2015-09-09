@@ -1,0 +1,21 @@
+<table border="1">
+  <thead>
+    <tr>
+      <th width="120" style="background-color: yellow;"><strong>Tgl. Keluar</strong></th>
+      <th width="300" style="background-color: yellow;"><strong>Pemasukan</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @barang_keluars.each do |barang_keluar| %>
+      <tr>
+        <td align="center"><%= barang_keluar.tanggal.strftime("%d-%m-%Y") %></td>
+        <td align="right"><%= "Rp. "+add_delimiter(barang_keluar.grand_total) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="2" style="text-align:right;"><%= "Rp. "+add_delimiter(@grand_total.first.nominal).to_s %></th>
+    </tr>
+  </tfoot>
+</table>

@@ -74,8 +74,11 @@
             <% if can? :create, BarangKeluar %>
               <li><%= link_to reports_path do %>Barang Keluar<% end %></li>
             <% end %>
-            <% if can? :manage, BarangMasuk %>
+            <% if can? :manage, User %>
               <li><%= link_to report_barang_masuk_path do %>Barang Masuk<% end %></li>
+            <% end %>
+            <% if can? :manage, User %>
+              <li><%= link_to report_pemasukan_path do %>Pemasukan<% end %></li>
             <% end %>
           </ul>
           <!-- /.nav-second-level -->
