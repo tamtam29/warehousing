@@ -2,6 +2,7 @@ class Barang < ActiveRecord::Base
   belongs_to :category
   belongs_to :unit
   has_one :promo
+  has_one :stock
 
   validates :code, :name, uniqueness: true, presence: true
   validates :category_id, :unit_id, :harga, :min_bayar_po, presence: true

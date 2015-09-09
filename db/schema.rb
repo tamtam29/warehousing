@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150829015224) do
 
   create_table "barang_keluar_barangs", force: :cascade do |t|
     t.integer  "barang_keluar_category_id", limit: 4
+    t.integer  "barang_id",                 limit: 4
     t.integer  "unit_id",                   limit: 4
     t.string   "code",                      limit: 255
     t.string   "name",                      limit: 255
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150829015224) do
     t.datetime "updated_at",                                                                     null: false
   end
 
+  add_index "barang_keluar_barangs", ["barang_id"], name: "index_barang_keluar_barangs_on_barang_id", using: :btree
   add_index "barang_keluar_barangs", ["barang_keluar_category_id"], name: "index_barang_keluar_barangs_on_barang_keluar_category_id", using: :btree
   add_index "barang_keluar_barangs", ["unit_id"], name: "index_barang_keluar_barangs_on_unit_id", using: :btree
 

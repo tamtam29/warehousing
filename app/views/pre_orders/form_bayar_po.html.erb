@@ -46,8 +46,8 @@
                   <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.pre_order)}" %></div></div>
                 </div>
                 <div class="row row_content">
-                  <div class="title_row report">Sisa Pembayaran</div>
-                  <div class="data_row report"><div class="pull_right"><%= "Rp. #{add_delimiter(@barang_keluar.grand_total - @barang_keluar.pre_order)}" %></div></div>
+                  <div class="title_row report"><strong>Sisa Pembayaran</strong></div>
+                  <div class="data_row report"><div class="pull_right"><strong><%= "Rp. #{add_delimiter(@barang_keluar.grand_total - @barang_keluar.pre_order)}" %></strong></div></div>
                 </div>
               </div>
             </div>

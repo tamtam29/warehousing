@@ -7,7 +7,7 @@ class PreOrdersController < ApplicationController
   end
 
   def show
-    authorize! :read, @barang_keluars
+    authorize! :read, @barang_keluar
   end
 
   def new
@@ -41,6 +41,7 @@ class PreOrdersController < ApplicationController
       if !barang_keluar_barang
         barang_keluar_barang = BarangKeluarBarang.new(old_barang.serializable_hash(except: [:id, :category_id, :gambar_barang_file_name, :gambar_barang_content_type, :gambar_barang_file_size, :gambar_barang_updated_at]))
         barang_keluar_barang.barang_keluar_category_id = barang_keluar_category.id
+        barang_keluar_barang.barang_id = old_barang.id
         barang_keluar_barang.save
       end
       # Barang keluar promo
@@ -75,9 +76,13 @@ class PreOrdersController < ApplicationController
 
   def form_bayar_po
     @barang_keluar = BarangKeluar.find(params[:pre_order_id])
-    @barang_keluar_pre_order = BarangKeluarPreOrder.new()
-    @barang_keluar_pre_order.pre_order_date = DateTime.now.strftime("%Y/%m/%d %H:%m")
-    authorize! :read, @barang_keluar
+    if check_stock(@barang_keluar)
+      @barang_keluar_pre_order = BarangKeluarPreOrder.new()
+      @barang_keluar_pre_order.pre_order_date = DateTime.now.strftime("%Y/%m/%d %H:%m")
+      authorize! :read, @barang_keluar
+    else
+      redirect_to pre_orders_path, alert: "Maaf, Stok untuk transaksi #{@barang_keluar.no_transaksi} belum tersedia."
+    end
   end
 
   def bayar_po
@@ -88,6 +93,7 @@ class PreOrdersController < ApplicationController
       if @barang_keluar_pre_order.save
         barang_keluar.state = "Lunas"
         barang_keluar.save
+        decrease_stock(barang_keluar)
         format.html { redirect_to show_bayar_po_path(params[:pre_order_id]), notice: 'Pre Order was successfully paid.' }
         format.json { render :show, status: :created, location: @barang_keluar }
       else
@@ -116,5 +122,26 @@ class PreOrdersController < ApplicationController
 
     def barang_keluar_pre_order_params
       params.require(:barang_keluar_pre_order).permit(:id, :barang_keluar_id, :bayar, :kembalian, :pre_order_date)
+    end
+
+    def check_stock(barang_keluar)
+      continue = true
+      barang_keluar.detail_barang_keluars.each do |detail_barang_keluar|
+        stok = detail_barang_keluar.barang_keluar_barang.barang.stock.jumlah
+        pre_order = detail_barang_keluar.jumlah
+        if stok <= pre_order
+          continue = false
+          break
+        end
+      end
+      return continue
+    end
+
+    def decrease_stock(barang_keluar)
+      barang_keluar.detail_barang_keluars.each do |detail_barang_keluar|
+        stok_barang = detail_barang_keluar.barang_keluar_barang.barang.stock
+        stok_barang.jumlah = detail_barang_keluar.barang_keluar_barang.barang.stock.jumlah.to_i - detail_barang_keluar.jumlah.to_i
+        stok_barang.save
+      end
     end
 end

@@ -50,6 +50,7 @@ class BarangKeluarsController < ApplicationController
       if !barang_keluar_barang
         barang_keluar_barang = BarangKeluarBarang.new(old_barang.serializable_hash(except: [:id, :category_id, :gambar_barang_file_name, :gambar_barang_content_type, :gambar_barang_file_size, :gambar_barang_updated_at]))
         barang_keluar_barang.barang_keluar_category_id = barang_keluar_category.id
+        barang_keluar_barang.barang_id = old_barang.id
         barang_keluar_barang.save
       end
       # Barang keluar promo
