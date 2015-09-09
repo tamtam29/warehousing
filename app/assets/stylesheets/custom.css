@@ -251,10 +251,9 @@ div.ui-datepicker {
 
 /* button pojok kiri atas*/
 .brand-btn {
-  margin-top: 0px;
+  margin-top: -8px;
   cursor: pointer;
-  border-right: 1px solid white;
-  border-left: 1px solid #54677a;
+  padding-left: 50px;
 }
 /* button pojok kiri atas*/
 
