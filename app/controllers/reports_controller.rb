@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "AND CAST(CONVERT_TZ(barang_keluars.tgl_keluar, '+00:00', '+07:00') as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
     if query_date != nil
       @barang_keluars = BarangKeluar.where("UPPER(barang_keluars.no_transaksi) like '%#{no_transaksi}%'
@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "CAST(barang_masuks.tgl_masuk as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "CAST(CONVERT_TZ(barang_masuks.tgl_masuk, '+00:00', '+07:00') as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
 
     if query_date != nil
@@ -65,7 +65,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "AND CAST(CONVERT_TZ(barang_keluars.tgl_keluar, '+00:00', '+07:00') as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
     if query_date != nil
       @barang_keluars = BarangKeluar.select("DATE(tgl_keluar) as tanggal, sum(grand_total) as grand_total")
@@ -90,7 +90,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "AND CAST(CONVERT_TZ(barang_keluars.tgl_keluar, '+00:00', '+07:00') as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
     if query_date != nil
       @barang_keluars = BarangKeluar.select("DATE(tgl_keluar) as tanggal, sum(grand_total) as grand_total")
@@ -115,7 +115,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "AND CAST(barang_keluars.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "AND CAST(CONVERT_TZ(barang_keluars.tgl_keluar, '+00:00', '+07:00') as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
 
     if query_date != nil

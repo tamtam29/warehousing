@@ -19,11 +19,11 @@
           <div class="form-group row">
             <div class="col-md-2">
               <%= label_tag :start_date, "Start Date", class: "control-label" %>
-              <%= text_field_tag :start_date, DateTime.now.to_date.strftime("%Y/%m/%d"), class: "form-control input-sm" %>
+              <%= text_field_tag :start_date, params[:start_date] ? params[:start_date] : DateTime.now.to_date.strftime("%Y/%m/%d"), class: "form-control input-sm" %>
             </div>
             <div class="col-md-2">
               <%= label_tag :end_date, "End Date", class: "control-label" %>
-              <%= text_field_tag :end_date, DateTime.now.to_date.strftime("%Y/%m/%d"), class: "form-control input-sm" %>
+              <%= text_field_tag :end_date, params[:end_date] ? params[:end_date] : DateTime.now.to_date.strftime("%Y/%m/%d"), class: "form-control input-sm" %>
             </div>
             <div class="col-md-4">
               <%= label_tag :keyword, "Keywoard", class: "control-label" %>
