@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
     if start_date == "" or end_date == ""
       query_date = nil
     else
-      query_date = "CAST(barang_masuks.tgl_keluar as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
+      query_date = "CAST(barang_masuks.tgl_masuk as DATE) BETWEEN '#{start_date}' AND '#{end_date}'"
     end
 
     if query_date != nil
